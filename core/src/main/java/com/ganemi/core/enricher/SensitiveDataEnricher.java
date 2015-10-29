@@ -12,24 +12,25 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and limitations under the License.
  *******************************************************************************/
-package com.ganemi.core;
-
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+/**
+ * 
+ */
+package com.ganemi.core.enricher;
 
 /**
- * The annotation to distinguish Sensitive data inside a domain object.
+ * Basic scope of this class is to enrich an
  * 
  * @author mccalv
  *
  */
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface SensitiveData {
-	public String collection() default "";
+public class SensitiveDataEnricher {
+
+	/**
+	 * Given an object
+	 * @param d
+	 */
+	public static void enrich(Object d) {
+		
+	}
 
 }

@@ -12,24 +12,29 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and limitations under the License.
  *******************************************************************************/
-package com.ganemi.core;
+package com.ganemi.core.storage;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * The annotation to distinguish Sensitive data inside a domain object.
- * 
- * @author mccalv
- *
- */
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface SensitiveData {
-	public String collection() default "";
+import org.junit.Test;
 
+public class SensitiveDateFieldTest {
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testNotSupportedType() {
+		new SensitiveDataField<>(Set.class, "a", new HashSet<String>());
+
+	}
+
+	@Test()
+	public void testSupportedType() {
+		new SensitiveDataField<>(String.class, "a", "a");
+		new SensitiveDataField<>(Date.class, "a", new Date());
+		new SensitiveDataField<>(Long.class, "a", 1L);
+		new SensitiveDataField<>(Integer.class, "a", 1);
+		// new SensitiveDataField<>(Short.class, "a", 01x);
+
+	}
 }

@@ -12,23 +12,33 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and limitations under the License.
  *******************************************************************************/
+/**
+ * 
+ */
+package com.ganemi.core.storage;
 
-package com.ganemi.core;
+import java.util.LinkedHashMap;
 
 /**
  * @author mccalv
  *
  */
-public class SensitiveDataTest {
+public class SensitiveDataHolder {
 
-	public static class AnObject {
-		@SensitiveData
-		private String name;
+	private LinkedHashMap<String, SensitiveDataField<?>> map = new LinkedHashMap<>();
 
-		@SensitiveData
-		private String surnname;
-		
-		
+	private SensitiveDataHolder() {
 
 	}
+	public static SensitiveDataHolder builder() {
+		return new SensitiveDataHolder();
+
+	}
+
+	public SensitiveDataHolder withField(SensitiveDataField field){
+		this.map.put(field.getIdentifier(),field);
+		return this;
+		
+	}
+
 }
