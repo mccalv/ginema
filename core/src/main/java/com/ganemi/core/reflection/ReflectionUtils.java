@@ -19,29 +19,40 @@ package com.ganemi.core.reflection;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import org.apache.commons.lang.ClassUtils;
 
 /**
+ * Utility class to handle basic reflection operation. The implementation is
+ * bases on {@link ClassUtils}
+ * 
  * @author mccalv
  *
  */
+@SuppressWarnings({ "unchecked", "rawtypes" })
+
 public class ReflectionUtils {
 
-	@SuppressWarnings("unchecked")
-	public static List<Field> getAnnotatedFields(Object a, @SuppressWarnings("rawtypes") Class annotation) {
+	public static List<Field> getAnnotatedFields(Object a, Class annotation) {
 		List<Field> declaredFields = new LinkedList<>(Arrays.asList(a.getClass().getDeclaredFields()));
 		declaredFields.removeIf(p -> p.getAnnotation(annotation) != null);
 		return declaredFields;
 	}
 
-	@SuppressWarnings("unchecked")
 	public static boolean isAssignableFrom(Class c, Set<Class> allowedClasses) {
 		return allowedClasses.stream().filter(clazz -> ClassUtils.isAssignable(c, clazz, true)).findFirst().isPresent();
+	}
+
+	public static boolean isACollection(Object c) {
+		return ClassUtils.isAssignable(c.getClass(), Collection.class);
+	}
+
+	public static boolean isPrimitive(Object c) {
+		return c.getClass().isPrimitive() || ClassUtils.wrapperToPrimitive(c.getClass()) != null;
 
 	}
 

@@ -25,6 +25,13 @@ import java.util.Set;
 import com.ganemi.core.reflection.ReflectionUtils;
 
 /**
+ * A sensitive data field is the holder for a sensitive data of a supported types:
+ * <ul>
+ * <li>String
+ * <li>Date
+ * <li>Number
+ * <li>bytes[]
+ * The holder contains another important 
  * @author mccalv
  *
  */
@@ -39,40 +46,26 @@ public class SensitiveDataField<T> {
 			add(Date.class);
 			add(Number.class);
 			add(byte[].class);
-		//	add(Integer.class);
-			
+
 		}
 	};
 
-	private Class<T> c;
 	private String identifier;
 	private T value;
 
-	public SensitiveDataField(Class<T> c, String identifier, T value) {
-		if (!ReflectionUtils.isAssignableFrom(c, SUPPORTED_FIELD_TYPES)) {
+	public SensitiveDataField(T value) {
+		this(null, value);
+	}
+
+	public SensitiveDataField(String identifier, T value) {
+		if (!ReflectionUtils.isAssignableFrom(value.getClass(), SUPPORTED_FIELD_TYPES)) {
 			throw new IllegalArgumentException(
-					"Type: " + c.getName() + " not supported. Sensitive data can be only of types:"
+					"Type: " + value.getClass().getName() + " not supported. Sensitive data can be only of types:"
 							+ Arrays.toString(SUPPORTED_FIELD_TYPES.toArray()));
 		}
 
-		this.c = c;
 		this.identifier = identifier;
 		this.value = value;
-	}
-
-	/**
-	 * @return the c
-	 */
-	public Class<T> getC() {
-		return c;
-	}
-
-	/**
-	 * @param c
-	 *            the c to set
-	 */
-	public void setC(Class<T> c) {
-		this.c = c;
 	}
 
 	/**

@@ -16,19 +16,22 @@
 package com.ganemi.core.reflection;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.ClassUtils;
 import org.junit.Test;
 
 import com.ganemi.core.SensitiveData;
-import com.ganemi.core.reflection.ReflectionUtils;
 import com.ganemi.core.storage.SensitiveDataField;
 
 /**
+ * {@link ReflectionUtils} unit test
  * 
  * @author mccalv
  *
@@ -39,6 +42,7 @@ public class ReflectionUtilsTest {
 		@SensitiveData
 		private String name;
 
+		@SuppressWarnings("unused")
 		private String aField;
 
 		@SensitiveData
@@ -62,6 +66,25 @@ public class ReflectionUtilsTest {
 		assertTrue(ReflectionUtils.isAssignableFrom(byte.class, SensitiveDataField.SUPPORTED_FIELD_TYPES));
 		assertTrue(ReflectionUtils.isAssignableFrom(int.class, SensitiveDataField.SUPPORTED_FIELD_TYPES));
 		assertTrue(ReflectionUtils.isAssignableFrom(byte[].class, SensitiveDataField.SUPPORTED_FIELD_TYPES));
+
+	}
+
+	@Test
+	public void testShouldTestIsACollection() {
+		assertTrue(ReflectionUtils.isACollection(new ArrayList<String>()));
+		assertTrue(ReflectionUtils.isACollection(SensitiveDataField.SUPPORTED_FIELD_TYPES));
+		assertFalse(ReflectionUtils.isACollection(new String[] {}));
+
+	}
+
+	@Test
+	public void testShouldTestIsPrimitive() {
+		assertTrue(ReflectionUtils.isPrimitive(1));
+		
+		assertTrue(ReflectionUtils.isPrimitive(1L));
+		assertFalse(ReflectionUtils.isPrimitive(new Date()));
+		assertFalse(ReflectionUtils.isACollection(new String[] {}));
+		assertFalse(ReflectionUtils.isPrimitive("a String"));
 
 	}
 

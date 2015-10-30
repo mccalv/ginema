@@ -12,27 +12,32 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and limitations under the License.
  *******************************************************************************/
-package com.ganemi.core.storage;
+/**
+ * 
+ */
+package com.ganemi.core.idgenerator;
 
-import java.util.Date;
-import java.util.HashSet;
+import com.ganemi.core.storage.SensitiveDataID;
 
-import org.junit.Test;
+/**
+ * An interface to generate SensitivaData Unique ID.
+ * 
+ * @author mccalv
+ *
+ */
+public interface IDGenerator {
+	/**
+	 * Generates a new SensitiveDataID
+	 * @return
+	 */
+	SensitiveDataID generate();
 
-public class SensitiveDateFieldTest {
+	/**
+	 * Checks the validity of the passed String and returns the generated object
+	 * 
+	 * @param s
+	 * @return
+	 */
+	SensitiveDataID fromString(String s);
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testNotSupportedType() {
-		new SensitiveDataField<>("a", new HashSet<String>());
-
-	}
-
-	@Test()
-	public void testSupportedType() {
-		new SensitiveDataField<>("a", "a");
-		new SensitiveDataField<>("a", new Date());
-		new SensitiveDataField<>("a", 1L);
-		new SensitiveDataField<>("a", 1);
-
-	}
 }

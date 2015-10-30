@@ -12,27 +12,43 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and limitations under the License.
  *******************************************************************************/
-package com.ganemi.core.storage;
+/**
+ * 
+ */
+package com.ganemi.core.idgenerator.impl;
 
-import java.util.Date;
-import java.util.HashSet;
+import java.util.UUID;
 
-import org.junit.Test;
+import com.ganemi.core.idgenerator.IDGenerator;
+import com.ganemi.core.storage.SensitiveDataID;
 
-public class SensitiveDateFieldTest {
+/**
+ * Implementation based on java UUID generator
+ * 
+ * @author mccalv
+ *
+ */
+public class UUIDGenerator implements IDGenerator {
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testNotSupportedType() {
-		new SensitiveDataField<>("a", new HashSet<String>());
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.ganemi.core.id.IDGenerator#generate()
+	 */
+	@Override
+	public SensitiveDataID generate() {
+		return new SensitiveDataID(UUID.randomUUID().toString());
 	}
 
-	@Test()
-	public void testSupportedType() {
-		new SensitiveDataField<>("a", "a");
-		new SensitiveDataField<>("a", new Date());
-		new SensitiveDataField<>("a", 1L);
-		new SensitiveDataField<>("a", 1);
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.ganemi.core.id.IDGenerator#fromString(java.lang.String)
+	 */
+	@Override
+	public SensitiveDataID fromString(String s) {
+		// TODO Auto-generated method stub
+		return new SensitiveDataID(UUID.fromString(s).toString());
 	}
+
 }
