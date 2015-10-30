@@ -42,7 +42,7 @@
 		</dependency>
 	</dependencies>
 	<modules>
-		<module>core</module>
+		<module>modules/core</module>
 	</modules>
 	<build>
 
