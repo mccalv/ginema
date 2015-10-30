@@ -68,4 +68,7 @@
 		</plugins>
 
 	</build>
+	<organization>
+		<name>com.ganemi</name>
+	</organization>
 </project>
