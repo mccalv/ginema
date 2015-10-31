@@ -51,4 +51,8 @@
 
 		</plugins>
 	</build>
+	<ciManagement>
+		<system>travis</system>
+		<url>https://travis-ci.org/mccalv/ginema</url>
+	</ciManagement>
 </project>

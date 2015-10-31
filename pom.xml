@@ -19,10 +19,34 @@
 	<name>ginema</name>
 	<url>http://maven.apache.org</url>
 
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+		</license>
+	</licenses>
+	<scm>
+		<url>https://github.com/mccalv/ginema</url>
+	</scm>
+	<developers>
+		<developer>
+			<id>mccalv</id>
+			<name>Mirko Calvaresi</name>
+			<email>mccalv at mccalv.com</email>
+			<organization>mccalv</organization>
+			<organizationUrl>mccalv.com</organizationUrl>
+			<roles>
+				<role>Project lead</role>
+			</roles>
+		</developer>
+
+	</developers>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.5</maven.compiler.source>
+		<maven.compiler.target>1.5</maven.compiler.target>
 	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.avro</groupId>
@@ -41,6 +65,8 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+
 	<modules>
 		<module>modules/core</module>
 	</modules>
@@ -65,10 +91,23 @@
 				<version>2.19</version>
 
 			</plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.5.201505241946</version>
+				<executions>
+                   
+                    <execution>
+                        <id>default-report</id>
+                        <phase>install</phase>
+                        <goals><goal>report</goal></goals>
+                    </execution>
+                </executions>
+			</plugin>
+
 		</plugins>
 
 	</build>
-	<organization>
-		<name>com.ganemi</name>
-	</organization>
+
 </project>
