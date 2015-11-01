@@ -27,6 +27,9 @@ public class SensitiveDataHolder {
 
   private LinkedHashMap<SensitiveDataID, SensitiveDataField<?>> map = new LinkedHashMap<>();
 
+  private String domain;
+  private SensitiveDataID sensitiveDataId;
+
   private SensitiveDataHolder() {
 
   }
@@ -36,10 +39,52 @@ public class SensitiveDataHolder {
 
   }
 
-  public SensitiveDataHolder withField(SensitiveDataField field) {
+  public SensitiveDataHolder withId(SensitiveDataID field) {
+    this.sensitiveDataId = field;
+    return this;
+
+  }
+
+  public SensitiveDataHolder withDomain(String domain) {
+    this.domain = domain;
+    return this;
+
+  }
+
+  /**
+   * @return the map
+   */
+  public LinkedHashMap<SensitiveDataID, SensitiveDataField<?>> getMap() {
+    return map;
+  }
+
+  /**
+   * @return the domain
+   */
+  public String getDomain() {
+    return domain;
+  }
+
+  /**
+   * @return the sensitiveDataId
+   */
+  public SensitiveDataID getSensitiveDataId() {
+    return sensitiveDataId;
+  }
+
+  public SensitiveDataHolder withField(SensitiveDataField<?> field) {
     this.map.put(field.getIdentifier(), field);
     return this;
 
+  }
+
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    return "SensitiveDataHolder [map=" + map + ", domain=" + domain + ", sensitiveDataId="
+        + sensitiveDataId + "]";
   }
 
 }

@@ -17,7 +17,6 @@ package com.ganemi.core.idgenerator.impl;
 import org.apache.commons.lang.RandomStringUtils;
 
 import com.ganemi.core.idgenerator.IDGenerator;
-import com.ganemi.core.storage.SensitiveDataID;
 
 /**
  * Implementation of {@link IDGenerator} based on {@link RandomStringUtils}. Its
@@ -39,15 +38,15 @@ public class RandomIDGenerator implements IDGenerator {
 	private static final int DEFAULT_LENGTH = 16;
 
 	@Override
-	public SensitiveDataID generate() {
-		return new SensitiveDataID(RandomStringUtils.random(DEFAULT_LENGTH, CHARS));
+	public String generate() {
+		return RandomStringUtils.random(DEFAULT_LENGTH, CHARS);
 	}
 
 	@Override
-	public SensitiveDataID fromString(String s) {
+	public String fromString(String s) {
 		if (s == null || s.length() != DEFAULT_LENGTH || !s.matches("^[a-zA-Z0-9]+$"))
 			throw new IllegalArgumentException("String is not a valid pattern");
-		return new SensitiveDataID(s);
+		return s;
 	}
 
 }

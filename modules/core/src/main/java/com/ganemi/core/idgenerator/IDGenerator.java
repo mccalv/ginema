@@ -32,7 +32,7 @@ public interface IDGenerator {
    * 
    * @return
    */
-  SensitiveDataID generate();
+  String generate();
 
   /**
    * Checks the validity of the passed String and returns the generated object
@@ -40,6 +40,6 @@ public interface IDGenerator {
    * @param s
    * @return
    */
-  SensitiveDataID fromString(String s);
+  String fromString(String s);
 
 }

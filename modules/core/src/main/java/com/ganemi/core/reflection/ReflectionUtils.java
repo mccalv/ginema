@@ -16,6 +16,7 @@
  */
 package com.ganemi.core.reflection;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Collection;
@@ -27,7 +28,7 @@ import java.util.stream.Stream;
 import org.apache.commons.lang.ClassUtils;
 
 /**
- * Utility class to handle basic reflection operation. The implementation is bases on
+ * Utility class to handle basic reflection operation. The implementation is based on
  * {@link ClassUtils}
  * 
  * @author mccalv
@@ -38,16 +39,22 @@ import org.apache.commons.lang.ClassUtils;
 public class ReflectionUtils {
 
   public static Stream<Field> getAnnotatedFields(Object a, Class annotation) {
-		List<Field> declaredFields = new LinkedList<>(Arrays.asList(a.getClass().getDeclaredFields()));
-		return declaredFields.stream().filter(p -> p.getAnnotation(annotation) != null);
-		    
-		
-	}
+    List<Field> declaredFields = new LinkedList<>(Arrays.asList(a.getClass().getDeclaredFields()));
+    return declaredFields.stream().filter(p -> p.getAnnotation(annotation) != null);
+
+
+  }
 
   public static boolean isAssignableFrom(Class c, Set<Class> allowedClasses) {
     return allowedClasses.stream().filter(clazz -> ClassUtils.isAssignable(c, clazz, true))
         .findFirst().isPresent();
   }
+
+  public static boolean isAssignableFrom(Class c, Class clazz) {
+    return ClassUtils.isAssignable(c, clazz, true);
+
+  }
+
 
   public static boolean isACollection(Object c) {
     return ClassUtils.isAssignable(c.getClass(), Collection.class);
@@ -56,6 +63,10 @@ public class ReflectionUtils {
   public static boolean isPrimitive(Object c) {
     return c.getClass().isPrimitive() || ClassUtils.wrapperToPrimitive(c.getClass()) != null;
 
+  }
+
+  public static <T extends Annotation> T getAnnotation(Object c, Class<T> annotationClass) {
+    return c.getClass().getAnnotation(annotationClass);
   }
 
   public static boolean isAnnotatedWith(Object c, Class clazz) {

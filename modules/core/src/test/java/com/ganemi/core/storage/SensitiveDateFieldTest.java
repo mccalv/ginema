@@ -34,7 +34,7 @@ public class SensitiveDateFieldTest {
   @Test()
   public void testSupportedType() {
     //Get a correct id
-    String id = Configuration.getIDGenerator().generate().getId();
+    String id = Configuration.getIDGenerator().generate();
     new SensitiveDataField<String>(id, "a");
     new SensitiveDataField<Date>(id, new Date());
     new SensitiveDataField<Long>(id, 1L);

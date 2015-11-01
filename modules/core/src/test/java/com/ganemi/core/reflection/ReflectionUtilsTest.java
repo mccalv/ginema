@@ -26,6 +26,7 @@ import org.apache.commons.lang.ClassUtils;
 import org.junit.Test;
 
 import com.ganemi.core.storage.SensitiveDataField;
+import com.ganemi.core.storage.SensitiveDataID;
 import com.ganemi.core.storage.SensitiveDataRoot;
 
 /**
@@ -34,6 +35,7 @@ import com.ganemi.core.storage.SensitiveDataRoot;
  * @author mccalv
  *
  */
+@SuppressWarnings("unused")
 public class ReflectionUtilsTest {
   @SensitiveDataRoot(name = "aObject")
   public static class AnObject {
@@ -50,11 +52,18 @@ public class ReflectionUtilsTest {
   }
 
   @Test
+  public void testShouldIsAssignableFrom() {
+    assertTrue(ReflectionUtils.isAssignableFrom(SensitiveDataID.class, SensitiveDataID.class));
+
+  }
+
+  @Test
   public void testShouldGetAnnotatedFields() {
-    
-    assertEquals(0, ReflectionUtils.getAnnotatedFields(new AnObject(), SuppressWarnings.class).count());
+
+    assertEquals(0,
+        ReflectionUtils.getAnnotatedFields(new AnObject(), SuppressWarnings.class).count());
     assertEquals(0, ReflectionUtils.getAnnotatedFields(new AnObject(), Nullable.class).count());
-  
+
   }
 
   @Test

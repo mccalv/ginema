@@ -21,9 +21,7 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
-import com.ganemi.core.configuration.Configuration;
 import com.ganemi.core.idgenerator.impl.UUIDGenerator;
-import com.ganemi.core.storage.SensitiveDataID;
 
 /**
  * Test the {@link Configuration} when no system property is defined, then it should fall back to
@@ -35,12 +33,12 @@ import com.ganemi.core.storage.SensitiveDataID;
 public class ConfigurationWithPropertyTest {
   @Test
   public void shouldApplyConfigurationTest() {
-    SensitiveDataID generate = Configuration.getIDGenerator().generate();
-    assertNotNull(generate.getId());
-    assertEquals(generate, Configuration.getIDGenerator().fromString(generate.getId()));
+    String generate = Configuration.getIDGenerator().generate();
+    assertNotNull(generate);
+    assertEquals(generate, Configuration.getIDGenerator().fromString(generate));
     System.setProperty("com.ganemi.idgenerator", "wrongValue"); // Already
                                                                 // set
-    assertEquals(generate, Configuration.getIDGenerator().fromString(generate.getId()));
+    assertEquals(generate, Configuration.getIDGenerator().fromString(generate));
 
   }
 

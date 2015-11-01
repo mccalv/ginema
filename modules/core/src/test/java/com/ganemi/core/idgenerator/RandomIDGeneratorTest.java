@@ -43,7 +43,7 @@ public class RandomIDGeneratorTest {
     Set<String> s = new HashSet<String>();
     int i = 0;
     while (i < 1000 * 1000) {
-      if (s.contains(generator.generate().getId()))
+      if (s.contains(generator.generate()))
         throw new IllegalArgumentException("Duplication found for a key");
       i++;
     }

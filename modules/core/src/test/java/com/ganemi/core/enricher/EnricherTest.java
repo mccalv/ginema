@@ -12,52 +12,30 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and limitations under the License.
  *******************************************************************************/
-/**
- * 
- */
-package com.ganemi.core.storage;
-
-import java.util.Date;
+package com.ganemi.core.enricher;
 
 import org.junit.Test;
 
-import com.ganemi.core.enricher.SensitiveDataEnricher;
+import com.ganemi.core.domain.SimpleDomainObject;
+import com.ganemi.core.storage.SensitiveDataField;
+import com.ganemi.core.storage.SensitiveDataHolder;
+import com.ganemi.core.storage.SensitiveDataID;
 
-/**
- * Junit test for {@link SensitiveDataEnricher}
- * 
- * @author mccalv
- *
- */
-public class SensitiveDateEnricherTest {
-
-
-
-  public static class DomainObject {
-    private SensitiveDataField<String> name;
-
-    private SensitiveDataField<Date> surname;
-
-
+public class EnricherTest {
+  @Test
+  public void testId() {
+    new SensitiveDataID();
 
   }
 
-  @SensitiveDataRoot(name = "domainObject2")
-  public static class DomainObject2 {
-
-    private SensitiveDataID id;
-
-    private SensitiveDataField<String> name;
-
-    private SensitiveDataField<Date> surname;
-
-
-
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void testEnrichment() {
-
-    SensitiveDataEnricher.enrich(new DomainObject());
+  @Test
+  public void testEnricherSimpleObject() {
+    SimpleDomainObject s = new SimpleDomainObject();
+    s.setId(new SensitiveDataID());
+    s.setName(new SensitiveDataField<String>("name"));
+    s.setSurnname(new SensitiveDataField<String>("surname"));
+    s.setChild(s);
+    SensitiveDataHolder enrich = SensitiveDataEnricher.enrich(s);
+    System.out.println(enrich);
   }
 }

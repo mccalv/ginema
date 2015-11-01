@@ -24,7 +24,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.ganemi.core.idgenerator.impl.RandomIDGenerator;
-import com.ganemi.core.storage.SensitiveDataID;
 
 /**
  * Test the {@link Configuration} when a system property is defined and the defaul generator is
@@ -43,15 +42,15 @@ public class ConfigurationWithoutPropertyTest {
 
   @Test
   public void shouldApplyConfigurationTest() {
-    SensitiveDataID generate = Configuration.getIDGenerator().generate();
+    String generated = Configuration.getIDGenerator().generate();
 
     assertTrue(Configuration.getIDGenerator() instanceof RandomIDGenerator);
-    String id = generate.getId();
-    System.out.println(id);
-    assertNotNull(id);
-    assertEquals(generate, Configuration.getIDGenerator().fromString(id));
+   
+    System.out.println(generated);
+    assertNotNull(generated);
+    assertEquals(generated, Configuration.getIDGenerator().fromString(generated));
     // set
-    assertEquals(generate, Configuration.getIDGenerator().fromString(id));
+    assertEquals(generated, Configuration.getIDGenerator().fromString(generated));
 
   }
 

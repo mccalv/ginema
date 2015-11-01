@@ -22,6 +22,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.ganemi.core.configuration.Configuration;
+import com.ganemi.core.idgenerator.IDGenerator;
 import com.ganemi.core.reflection.ReflectionUtils;
 
 /**
@@ -59,6 +60,8 @@ public class SensitiveDataField<T> {
     this(null, value);
   }
 
+
+
   public SensitiveDataField(String identifier, T value) {
     if (!ReflectionUtils.isAssignableFrom(value.getClass(), SUPPORTED_FIELD_TYPES)) {
       throw new IllegalArgumentException("Type: " + value.getClass().getName()
@@ -66,7 +69,11 @@ public class SensitiveDataField<T> {
           + Arrays.toString(SUPPORTED_FIELD_TYPES.toArray()));
     }
 
-    this.identifier = Configuration.getIDGenerator().fromString(identifier);
+    IDGenerator idGenerator = Configuration.getIDGenerator();
+    // Generates the Id or verify it and assign to value
+    this.identifier = identifier == null ? new SensitiveDataID()
+        : new SensitiveDataID(idGenerator.fromString(identifier));
+
     this.value = value;
   }
 
@@ -91,6 +98,18 @@ public class SensitiveDataField<T> {
    */
   public void setValue(T value) {
     this.value = value;
+  }
+
+
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    return "SensitiveDataField [identifier=" + identifier + ", value=" + value + "]";
   }
 
 }
