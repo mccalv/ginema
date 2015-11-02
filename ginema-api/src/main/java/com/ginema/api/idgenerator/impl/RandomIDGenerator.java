@@ -16,7 +16,7 @@ package com.ginema.api.idgenerator.impl;
 
 import org.apache.commons.lang.RandomStringUtils;
 
-import com.ginemalapi.idgenerator.IDGenerator;
+import com.ginema.api.idgenerator.IDGenerator;
 
 /**
  * Implementation of {@link IDGenerator} based on {@link RandomStringUtils}. Its

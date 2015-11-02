@@ -14,7 +14,7 @@
 /**
  * 
  */
-package com.ginemalapi.idgenerator;
+package com.ginema.api.idgenerator;
 
 import com.ginema.api.storage.SensitiveDataID;
 

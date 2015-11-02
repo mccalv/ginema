@@ -17,7 +17,7 @@
 package com.ginema.api.storage;
 
 import com.ginema.api.configuration.Configuration;
-import com.ginemalapi.idgenerator.IDGenerator;
+import com.ginema.api.idgenerator.IDGenerator;
 
 /**
  * The holder for a holding the unique identifier or a SensitiveData. The strategy for the

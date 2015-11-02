@@ -18,7 +18,7 @@ package com.ginema.api.idgenerator.impl;
 
 import java.util.UUID;
 
-import com.ginemalapi.idgenerator.IDGenerator;
+import com.ginema.api.idgenerator.IDGenerator;
 
 /**
  * Implementation based on java UUID generator

@@ -13,8 +13,8 @@
  *******************************************************************************/
 package com.ginema.api.configuration;
 
+import com.ginema.api.idgenerator.IDGenerator;
 import com.ginema.api.idgenerator.impl.UUIDGenerator;
-import com.ginemalapi.idgenerator.IDGenerator;
 
 /**
  * Configuration file where the basic id generation strategy is defined. To overwrite the

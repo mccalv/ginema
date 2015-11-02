@@ -22,8 +22,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.ginema.api.configuration.Configuration;
+import com.ginema.api.idgenerator.IDGenerator;
 import com.ginema.api.reflection.ReflectionUtils;
-import com.ginemalapi.idgenerator.IDGenerator;
 
 /**
  * A sensitive data field is the holder for a sensitive data of a supported types:

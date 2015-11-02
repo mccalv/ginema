@@ -18,9 +18,9 @@ import java.util.Set;
 
 import org.junit.Test;
 
+import com.ginema.api.idgenerator.IDGenerator;
 import com.ginema.api.idgenerator.impl.RandomIDGenerator;
 import com.ginema.api.idgenerator.impl.UUIDGenerator;
-import com.ginemalapi.idgenerator.IDGenerator;
 
 public class RandomIDGeneratorTest {
 
