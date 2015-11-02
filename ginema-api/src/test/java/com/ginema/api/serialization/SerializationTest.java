@@ -17,12 +17,15 @@
 package com.ginema.api.serialization;
 
 import java.io.File;
+import java.util.Date;
+import java.util.UUID;
 
-import org.apache.avro.Schema;
-import org.apache.avro.file.DataFileReader;
-import org.apache.avro.generic.GenericDatumReader;
-import org.apache.avro.generic.GenericRecord;
-import org.apache.avro.io.DatumReader;
+import org.apache.avro.file.DataFileWriter;
+import org.apache.avro.io.DatumWriter;
+import org.apache.avro.specific.SpecificDatumWriter;
+
+import com.ginema.api.avro.DateEntry;
+import com.ginema.api.avro.SensitiveDataHolder;
 
 /**
  * @author mccalv
@@ -34,19 +37,19 @@ public class SerializationTest {
 
   public void testSerialization() throws Exception {
     // Deserialize users from disk
-    Schema schema = null;
-    DatumReader<GenericRecord> datumReader = new GenericDatumReader<GenericRecord>(schema);
-    DataFileReader<GenericRecord> dataFileReader =
-        new DataFileReader<GenericRecord>(file, datumReader);
-    GenericRecord user = null;
-    while (dataFileReader.hasNext()) {
-      // Reuse user object by passing it to next(). This saves us from
-      // allocating and garbage collecting many objects for files with
-      // many items.
-      user = dataFileReader.next(user);
-      System.out.println(user);
+    SensitiveDataHolder sensitiveDataHolder = new SensitiveDataHolder();
+    sensitiveDataHolder.setId("id");
+    sensitiveDataHolder.setDomain("domain");
+    sensitiveDataHolder.getDates().put("dd", new DateEntry(UUID.randomUUID().toString(), new Date().getTime()));
+    DatumWriter<SensitiveDataHolder> userDatumWriter =
+        new SpecificDatumWriter<SensitiveDataHolder>(SensitiveDataHolder.class);
+    DataFileWriter<SensitiveDataHolder> dataFileWriter =
+        new DataFileWriter<SensitiveDataHolder>(userDatumWriter);
+     dataFileWriter.create(sensitiveDataHolder.getSchema(), new File("users.avro"));
+    dataFileWriter.close();
 
-    }
+
+
   }
 
 }

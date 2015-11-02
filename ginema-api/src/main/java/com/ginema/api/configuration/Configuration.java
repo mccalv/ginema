@@ -30,7 +30,7 @@ import com.ginema.api.idgenerator.impl.UUIDGenerator;
  *
  */
 public class Configuration {
-  private static final String ENV_PROPERTY_GENERATOR = "com.ganemi.idgenerator";
+  private static final String ENV_PROPERTY_GENERATOR = "com.ginema.idgenerator";
   private static IDGenerator idGenerator;
 
   public static IDGenerator getIDGenerator() {

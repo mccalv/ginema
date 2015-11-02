@@ -16,8 +16,6 @@
  */
 package com.ginema.api.idgenerator;
 
-import com.ginema.api.storage.SensitiveDataID;
-
 /**
  * An interface to generate SensitivaData Unique ID. The implementor define the strategy for the
  * unique id generation

@@ -5,7 +5,7 @@
  "name": "SensitiveDataHolder",
  "fields": [
      {"name": "id", "type": "string"},
-     {"name": "domain",  "type": ["int", "null"]},
+     {"name": "domain",  "type": ["string", "null"]},
      { "name": "dates",
       "type":{
           

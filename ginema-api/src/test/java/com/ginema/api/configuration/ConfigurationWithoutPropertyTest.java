@@ -23,7 +23,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ginema.api.configuration.Configuration;
 import com.ginema.api.idgenerator.impl.RandomIDGenerator;
 
 /**
@@ -36,7 +35,7 @@ import com.ginema.api.idgenerator.impl.RandomIDGenerator;
 public class ConfigurationWithoutPropertyTest {
   @Before
   public void setProperty() {
-    System.setProperty("com.ganemi.idgenerator",
+    System.setProperty("com.ginema.idgenerator",
         "com.ginema.api.idgenerator.impl.RandomIDGenerator"); // Already
 
   }
