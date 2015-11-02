@@ -1,0 +1,122 @@
+/*Working Example */
+// (null, boolean, int, long, float, double, bytes, and string) 
+{"namespace": "com.ginema.avro",
+ "type": "record",
+ "name": "SensitiveDataHolder2",
+ "fields": [
+     {"name": "id", "type": "string"},
+     {"name": "domain",  "type": ["int", "null"]},
+     { "name": "dates",
+      "type":{
+          
+            "type":"map",
+            "values":
+    {
+     "type": "record",
+     "name": "DateEntry",
+     "fields": [
+      {"name": "n", "type": ["string", "null"]},
+      {"name": "v", "type": "long"}
+    ]     
+    }
+            }
+      
+    },
+  { "name": "strings",
+      "type":{
+          
+            "type":"map",
+            "values":
+    {
+     "type": "record",
+     "name": "StringEntry",
+     "fields": [
+      {"name": "n", "type": ["string", "null"]},
+      {"name": "v", "type": "string"}
+    ]     
+    }
+            }
+      
+    },
+ { "name": "booleans",
+      "type":{
+          
+            "type":"map",
+            "values":
+    {
+     "type": "record",
+     "name": "BooleanEntry",
+     "fields": [
+      {"name": "n", "type": ["string", "null"]},
+      {"name": "v", "type": "string"}
+    ]     
+    }
+            }
+      
+    },
+ { "name": "longs",
+      "type":{
+          
+            "type":"map",
+            "values":
+    {
+     "type": "record",
+     "name": "LongEntry",
+     "fields": [
+      {"name": "n", "type": ["string", "null"]},
+      {"name": "v", "type": "long"}
+    ]     
+    }
+            }
+      
+    },
+ { "name": "floats",
+      "type":{
+          
+            "type":"map",
+           "values":
+    {
+     "type": "record",
+     "name": "FloatEntry",
+     "fields": [
+      {"name": "n", "type": ["string", "null"]},
+      {"name": "v", "type": "float"}
+    ]     
+    }
+            }
+      
+    },
+ { "name": "doubles",
+      "type":{
+          
+            "type":"map",
+            "values":
+    {
+     "type": "record",
+     "name": "DoubleEntry",
+     "fields": [
+      {"name": "n", "type": ["string", "null"]},
+      {"name": "v", "type": "double"}
+    ]     
+    }
+            }
+      
+    },
+ { "name": "bytes",
+     "type":{
+          
+            "type":"map",
+            "values":
+    {
+     "type": "record",
+     "name": "BytesEntry",
+     "fields": [
+      {"name": "n", "type": ["string", "null"]},
+      {"name": "v", "type": "bytes"}
+    ]     
+    }
+            }
+      
+    }
+ ]
+}

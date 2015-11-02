@@ -92,6 +92,19 @@ public class ReflectionUtilsTest {
 
   }
 
+
+  @Test
+  public void testShouldTestIsJDK() {
+    assertTrue(ReflectionUtils.isJDKClass(1));
+    assertTrue(ReflectionUtils.isJDKClass(new Date()));
+    assertTrue(ReflectionUtils.isJDKClass(""));
+    assertTrue(ReflectionUtils.isJDKClass(1L));
+    assertTrue(ReflectionUtils.isJDKClass(new Long(1)));
+    assertTrue(ReflectionUtils.isJDKClass(new OutOfMemoryError()));
+
+
+  }
+
   @Test
   public void testShouldTestIsPrimitive() {
     assertTrue(ReflectionUtils.isPrimitive(1));

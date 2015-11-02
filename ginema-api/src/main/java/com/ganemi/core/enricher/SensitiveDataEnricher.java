@@ -76,9 +76,9 @@ public class SensitiveDataEnricher {
       throwIllegalArgumentException();
     }
   }
-  public static <T> boolean isJDKClass(T t) {
-    return t.getClass().getPackage().getName().startsWith("java");
-}
+
+ 
+
   /**
    * Recursive method to enrich the object
    * 
@@ -95,7 +95,8 @@ public class SensitiveDataEnricher {
           f.setAccessible(true);
           holder.withField((SensitiveDataField<?>) value);
         }
-        if ( value!=null && !isJDKClass(value.getClass()) &&ReflectionUtils.isAssignableFrom(value.getClass(), Object.class)) {
+        if (value != null && !ReflectionUtils.isJDKClass(value.getClass())
+            && ReflectionUtils.isAssignableFrom(value.getClass(), Object.class)) {
           enrichObjectTree(value, holder);
 
         }

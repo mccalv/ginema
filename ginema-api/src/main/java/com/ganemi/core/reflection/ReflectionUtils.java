@@ -72,4 +72,8 @@ public class ReflectionUtils {
   public static boolean isAnnotatedWith(Object c, Class clazz) {
     return c.getClass().isAnnotationPresent(clazz);
   }
+
+  public static <T> boolean isJDKClass(T t) {
+    return t.getClass().getPackage().getName().startsWith("java");
+  }
 }
