@@ -9,6 +9,7 @@
 *.jar
 *.war
 *.ear
+*generated-sources
 
 *.iml
 *.idea
