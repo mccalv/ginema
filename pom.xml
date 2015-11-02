@@ -49,6 +49,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.genetared.source.folder>${project.build.directory}/target/generated-sources/java/</maven.genetared.source.folder>
+		
 	</properties>
 	<dependencies>
 		<dependency>
@@ -84,6 +86,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.3</version>
 				<configuration>
+				
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
@@ -105,15 +108,20 @@
 				<artifactId>build-helper-maven-plugin</artifactId>
 				<executions>
 					<execution>
+					
 						<id>add-source</id>
 						<phase>generate-sources</phase>
+					
 						<goals>
 							<goal>add-source</goal>
 						</goals>
 						<configuration>
+						
+						
 							<sources>
-								<source>${project.build.directory}/generated-sources/java/</source>
+								<source>${maven.genetared.source.folder}</source>
 							</sources>
+							
 						</configuration>
 					</execution>
 				</executions>

@@ -44,8 +44,9 @@
 							<goal>schema</goal>
 						</goals>
 						<configuration>
+							<stringType>String</stringType>
 							<sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
-							<outputDirectory>${project.basedir}/generated-sources/java/</outputDirectory>
+							<outputDirectory>${maven.genetared.source.folder}</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>
