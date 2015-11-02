@@ -44,6 +44,7 @@ public class ConfigurationWithoutPropertyTest {
   public void shouldApplyConfigurationTest() {
     String generated = Configuration.getIDGenerator().generate();
     System.out.println(generated);
+    
     /*
     assertTrue(Configuration.getIDGenerator() instanceof RandomIDGenerator);
     assertNotNull(generated);
