@@ -2,10 +2,10 @@
 The central ideal behind "Ginema" is to *decouple the sensitive data from the domain model classes* in order to perform federated search against different datasets and cloud resources. 
 Sensitive date are stored in separated hash based structures and serialized using specific strategies transparent to the domain model.
 ## Getting started:
-You just need to annotate your domain model this way:
+You just need to annotate your domain model using the following apparoach:
 
 ```java
-@SensitiveDataRoot(name = "aSimpleObjec")
+@SensitiveDataRoot(name = "simpleDomainObject")
 public class SimpleDomainObject {
 
   private SensitiveDataID id;
@@ -22,9 +22,13 @@ The simplest enrichment supported is the one to convert an object and extract it
   SensitiveDataHolder enrich = SensitiveDataEnricher.enrich(s);
 ```
 The SensitiveDataHolder is an Apache Avro structure language agnostic which can be serialized in any possible enviroment
-[Apache Avro!](https://avro.apache.org/)
+[Apache Avro!](https://avro.apache.org/).
 
 
+
+## Requirement:
+Java 1.8 
+Maven 3.1.1
 
 
 
