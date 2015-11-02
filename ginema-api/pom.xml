@@ -15,7 +15,7 @@
 		<groupId>com.ginema</groupId>
 		<artifactId>ginema</artifactId>
 		<version>1.0-SNAPSHOT</version>
-		<relativePath />
+		<relativePath >../pom.xml</relativePath>
 	</parent>
 
 	<artifactId>ginema-api</artifactId>
