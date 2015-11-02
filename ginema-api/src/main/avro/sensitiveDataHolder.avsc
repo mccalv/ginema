@@ -1,8 +1,8 @@
 /*Working Example */
 // (null, boolean, int, long, float, double, bytes, and string) 
-{"namespace": "com.ginema.avro",
+{"namespace": "com.ginema.api.avro",
  "type": "record",
- "name": "SensitiveDataHolder2",
+ "name": "SensitiveDataHolder",
  "fields": [
      {"name": "id", "type": "string"},
      {"name": "domain",  "type": ["int", "null"]},

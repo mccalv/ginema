@@ -20,7 +20,7 @@
 
 	<artifactId>ginema-api</artifactId>
 
-	<name>core</name>
+	<name>ginema-api</name>
 	<url>http://maven.apache.org</url>
 	
 
