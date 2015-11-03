@@ -384,7 +384,7 @@ public class SchemaHelper {
   public static Schema getGinemaSchemaFromClassPath() throws Exception {
     InputStream resourceAsStream =
         ClassLoader.getSystemResourceAsStream("avro/sensitivedataHolder.avsc");
-        System.out.print(ClassLoader.getSystemResource("avro/sensitivedataHolder.avsc").getPath());
+        System.out.print("AvroSchema loading:"+ClassLoader.getSystemResource("*").getPath() +ClassLoader.getSystemResource("avro/sensitivedataHolder.avsc").getPath());
     return new Schema.Parser().parse(resourceAsStream);
 
   }
