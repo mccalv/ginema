@@ -19,6 +19,7 @@ package com.ginema.api.serialization;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
@@ -51,8 +52,10 @@ public class SerializationTest {
 
   @Test
   public void testSchemaBuilderAndJsonShouldBeEqual() throws Exception {
+  
+    InputStream resourceAsStream = ClassLoader.getSystemResourceAsStream("avro/sensitivedataHolder.avsc");
     Schema parse = new Schema.Parser()
-        .parse(this.getClass().getClassLoader().getResourceAsStream("avro/sensitivedataHolder.avsc"));
+        .parse(resourceAsStream);
     assertEquals(parse, SchemaHelper.getGinemaSchema());
 
   }
