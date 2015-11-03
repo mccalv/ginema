@@ -45,7 +45,7 @@
 						</goals>
 						<configuration>
 							<stringType>String</stringType>
-							<sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
+							<sourceDirectory>${project.basedir}/src/main/resources/avro/</sourceDirectory>
 							<outputDirectory>${maven.genetared.source.folder}</outputDirectory>
 						</configuration>
 					</execution>

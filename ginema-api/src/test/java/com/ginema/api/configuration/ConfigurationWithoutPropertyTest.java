@@ -16,14 +16,8 @@
  */
 package com.ginema.api.configuration;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Before;
 import org.junit.Test;
-
-import com.ginema.api.idgenerator.impl.RandomIDGenerator;
 
 /**
  * Test the {@link Configuration} when a system property is defined and the defaul generator is

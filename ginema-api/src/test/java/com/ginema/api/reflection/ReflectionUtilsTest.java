@@ -75,9 +75,11 @@ public class ReflectionUtilsTest {
     assertTrue(
         ReflectionUtils.isAssignableFrom(Integer.class, SensitiveDataField.SUPPORTED_FIELD_TYPES));
     assertTrue(
-        ReflectionUtils.isAssignableFrom(Short.class, SensitiveDataField.SUPPORTED_FIELD_TYPES));
+        ReflectionUtils.isAssignableFrom(Double.class, SensitiveDataField.SUPPORTED_FIELD_TYPES));
     assertTrue(
-        ReflectionUtils.isAssignableFrom(byte.class, SensitiveDataField.SUPPORTED_FIELD_TYPES));
+        ReflectionUtils.isAssignableFrom(Float.class, SensitiveDataField.SUPPORTED_FIELD_TYPES));
+    assertTrue(
+        ReflectionUtils.isAssignableFrom(boolean.class, SensitiveDataField.SUPPORTED_FIELD_TYPES));
     assertTrue(
         ReflectionUtils.isAssignableFrom(int.class, SensitiveDataField.SUPPORTED_FIELD_TYPES));
     assertTrue(

@@ -18,7 +18,7 @@ import com.ginema.api.storage.SensitiveDataField;
 import com.ginema.api.storage.SensitiveDataID;
 import com.ginema.api.storage.SensitiveDataRoot;
 
-@SensitiveDataRoot(name = "aSimpleObjec")
+@SensitiveDataRoot(name = "aSimpleObject")
 public class SimpleDomainObject {
 
   private SensitiveDataID id;

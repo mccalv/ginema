@@ -120,7 +120,7 @@
 						
 							<sources>
 								<source>${maven.genetared.source.folder}</source>
-							</sources>
+													</sources>
 							
 						</configuration>
 					</execution>

@@ -17,12 +17,22 @@
 package com.ginema.api.enricher;
 
 import java.lang.reflect.Field;
+import java.nio.ByteBuffer;
+import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.lang.ClassUtils;
 
+import com.ginema.api.avro.BooleanEntry;
+import com.ginema.api.avro.BytesEntry;
+import com.ginema.api.avro.DateEntry;
+import com.ginema.api.avro.DoubleEntry;
+import com.ginema.api.avro.LongEntry;
+import com.ginema.api.avro.SensitiveDataHolder;
+import com.ginema.api.avro.StringEntry;
 import com.ginema.api.reflection.ReflectionUtils;
 import com.ginema.api.storage.SensitiveDataField;
-import com.ginema.api.storage.SensitiveDataHolder;
 import com.ginema.api.storage.SensitiveDataID;
 import com.ginema.api.storage.SensitiveDataRoot;
 
@@ -45,14 +55,14 @@ public class SensitiveDataEnricher {
       throwIllegalArgumentException();
     }
 
-    SensitiveDataHolder holder = SensitiveDataHolder.builder();
-    holder.withDomain(sensitiveDataRoot.name());
+     SensitiveDataHolder sensitiveDataHolder =new SensitiveDataHolder();
+     sensitiveDataHolder.setDomain(sensitiveDataRoot.name());
     try {
 
 
-      enrichWithId(o, holder);
-      enrichObjectTree(o, holder);
-      return holder;
+      enrichWithId(o, sensitiveDataHolder);
+      enrichObjectTree(o, sensitiveDataHolder);
+      return sensitiveDataHolder;
     } catch (Exception e) {
       throw new RuntimeException(e.toString(), e);
     }
@@ -67,7 +77,7 @@ public class SensitiveDataEnricher {
         if (ReflectionUtils.isAssignableFrom(f.getType(), SensitiveDataID.class)) {
           f.setAccessible(true);
 
-          holder.withId((SensitiveDataID) f.get(o));
+          holder.setId(((SensitiveDataID) f.get(o)).getId());
           asId = true;
         }
       }
@@ -77,7 +87,7 @@ public class SensitiveDataEnricher {
     }
   }
 
- 
+
 
   /**
    * Recursive method to enrich the object
@@ -93,7 +103,8 @@ public class SensitiveDataEnricher {
         Object value = f.get(o);
         if (ClassUtils.isAssignable(f.getType(), SensitiveDataField.class)) {
           f.setAccessible(true);
-          holder.withField((SensitiveDataField<?>) value);
+          populateHolderMapByType(holder, (SensitiveDataField<?>) value);
+          // holder.withField((SensitiveDataField<?>) value);
         }
         if (value != null && !ReflectionUtils.isJDKClass(value.getClass())
             && ReflectionUtils.isAssignableFrom(value.getClass(), Object.class)) {
@@ -103,6 +114,57 @@ public class SensitiveDataEnricher {
 
       }
     }
+
+  }
+
+  public static <V> void populateTypedMap(SensitiveDataField<?> value, Map<String, V> map, V v) {
+    // Initializes the map if null
+    if (map == null)
+      map = new HashMap<String, V>();
+
+    map.put(value.getIdentifier().getId(), v);
+
+  }
+
+  private static void populateHolderMapByType(SensitiveDataHolder holder, SensitiveDataField<?> value) {
+    if (value.getValue() == null)
+      return;
+    @SuppressWarnings("rawtypes")
+    Class clazz = value.getValue().getClass();
+    if (ClassUtils.isAssignable(clazz, Date.class)) {
+      populateTypedMap(value, holder.getDates(),
+          new DateEntry(value.getIdentifier().getId(), ((Date) value.getValue()).getTime()));
+      return;
+    }
+    if (ClassUtils.isAssignable(clazz, String.class)) {
+      populateTypedMap(value, holder.getStrings(),
+          new StringEntry(value.getIdentifier().getId(), ((String) value.getValue())));
+      return;
+    }
+    if (ClassUtils.isAssignable(clazz, Long.class)) {
+      populateTypedMap(value, holder.getLongs(),
+          new LongEntry(value.getIdentifier().getId(), ((Long) value.getValue())));
+      return;
+    }
+  
+    if (ClassUtils.isAssignable(clazz, Double.class)) {
+      populateTypedMap(value, holder.getDoubles(),
+          new DoubleEntry(value.getIdentifier().getId(), ((Double) value.getValue())));
+      return;
+    }
+
+    if (ClassUtils.isAssignable(clazz, Boolean.class)) {
+      populateTypedMap(value, holder.getBooleans(),
+          new BooleanEntry( value.getIdentifier().getId(),(Boolean) value.getValue()));
+      return;
+    }
+    if (ClassUtils.isAssignable(clazz, byte[].class)) {
+      populateTypedMap(value, holder.getBytes(), new BytesEntry(value.getIdentifier().getId(),
+          ByteBuffer.wrap((byte[]) value.getValue())));
+      return;
+    }
+
+
 
   }
 

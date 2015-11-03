@@ -48,11 +48,18 @@ public class SensitiveDataField<T> {
     {
       add(String.class);
       add(Date.class);
-      add(Number.class);
+      add(Boolean.class);
+      //Supported number
+      add(Integer.class);
+      add(Long.class);
+      add(Double.class);
+      add(Float.class);
       add(byte[].class);
 
     }
   };
+  
+ 
   private SensitiveDataID identifier;
   private T value;
 

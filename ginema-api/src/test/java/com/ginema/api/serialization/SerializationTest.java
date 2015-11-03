@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 
+import org.apache.avro.Schema;
 import org.apache.avro.file.DataFileReader;
 import org.apache.avro.file.DataFileWriter;
 import org.apache.avro.io.DatumReader;
@@ -33,8 +34,11 @@ import org.junit.Test;
 
 import com.ginema.api.avro.DateEntry;
 import com.ginema.api.avro.SensitiveDataHolder;
+import com.ginema.api.avro.util.SchemaHelper;
 
 /**
+ * A base test for serialization in Avro
+ * 
  * @author mccalv
  *
  */
@@ -45,6 +49,15 @@ public class SerializationTest {
   private final static String ID_HOLDER = UUID.randomUUID().toString();
   private final static String DOMAIN = "domain";
 
+  @Test
+  public void testSchemaBuilderAndJsonShouldBeEqual() throws Exception {
+    Schema parse = new Schema.Parser()
+        .parse(this.getClass().getResourceAsStream("/avro/sensitivedataHolder.avsc"));
+    assertEquals(parse, SchemaHelper.toJson());
+
+  }
+
+  /** Test the serialization and serialization using Apache Avro */
   @Test
   public void testSerialization() throws Exception {
     // Deserialize users from disk
@@ -76,7 +89,7 @@ public class SerializationTest {
       assertEquals(ID_HOLDER, sensitideDataHolder.getId().toString());
       assertEquals(DOMAIN, sensitideDataHolder.getDomain().toString());
 
-      assertEquals(DATE, new Date(sensitideDataHolder.getDates().get(ID_GENERATED).getV()));
+      assertEquals(DATE, new Date(sensitideDataHolder.getDates().get(ID_GENERATED).getValue()));
 
       System.out.println(sensitideDataHolder);
     }
