@@ -13,6 +13,8 @@
  *******************************************************************************/
 package com.ginema.api.avro.util;
 
+import java.io.InputStream;
+
 import org.apache.avro.Schema;
 import org.apache.avro.SchemaBuilder;
 
@@ -377,5 +379,12 @@ public class SchemaHelper {
 
   public static String getGinemaJsonSchema() {
     return SchemaHelper.getGinemaSchema().toString();
+  }
+
+  public static Schema getGinemaSchemaFromClassPath() throws Exception {
+    InputStream resourceAsStream =
+        ClassLoader.getSystemResourceAsStream("avro/sensitivedataHolder.avsc");
+    return new Schema.Parser().parse(resourceAsStream);
+
   }
 }
