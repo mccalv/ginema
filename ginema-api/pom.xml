@@ -32,7 +32,7 @@
 
 	</dependencies>
 	<build>
-		<resources>
+		<!-- <resources>
 			<resource>
 				<directory>${basedir}/src/main/resources</directory>
 				<includes>
@@ -48,7 +48,7 @@
 				</includes>
 			</testResource>
 
-		</testResources>
+		</testResources> -->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.avro</groupId>

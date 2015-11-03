@@ -52,7 +52,7 @@ public class SerializationTest {
   @Test
   public void testSchemaBuilderAndJsonShouldBeEqual() throws Exception {
     Schema parse = new Schema.Parser()
-        .parse(this.getClass().getResourceAsStream("/avro/sensitivedataHolder.avsc"));
+        .parse(this.getClass().getClassLoader().getResourceAsStream("avro/sensitivedataHolder.avsc"));
     assertEquals(parse, SchemaHelper.getGinemaSchema());
 
   }
