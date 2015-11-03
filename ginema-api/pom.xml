@@ -32,18 +32,17 @@
 
 	</dependencies>
 	<build>
-		<!-- <resources>
+		<resources>
 			<resource>
-				<directory>${basedir}/src/main/resources</directory>
+				<directory>/src/main/resources</directory>
 				<includes>
 					<include>**/*</include>
 				</includes>
 			</resource>
 		</resources>
-		-->
 		<testResources>
 			<testResource>
-				<directory>${basedir}/src/main/resources</directory>
+				<directory>/src/main/resources</directory>
 				<includes>
 					<include>**/*</include>
 				</includes>
