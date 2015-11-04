@@ -35,9 +35,15 @@
 		<resources>
 			<resource>
 				<directory>${project.basedir}/src/main/resources</directory>
+				<includes>
+        			 	<include>**/*</include>
+            			</includes>
 			</resource>
 		</resources>
 		<testResources>
+			<testResource>
+				<directory>${project.basedir}/src/main/resources</directory>
+			</testResource>
 			<testResource>
 				<directory>${project.basedir}/src/test/resources</directory>
 			</testResource>
