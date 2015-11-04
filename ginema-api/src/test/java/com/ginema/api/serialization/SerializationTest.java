@@ -52,7 +52,7 @@ public class SerializationTest {
 
   @Test
   public void testSchemaBuilderAndJsonShouldBeEqual() throws Exception {
-  
+      System.out.print("Check for Schema generation");
       assertEquals(SchemaHelper.getGinemaSchemaFromClassPath(), SchemaHelper.getGinemaSchema());
 
   }
