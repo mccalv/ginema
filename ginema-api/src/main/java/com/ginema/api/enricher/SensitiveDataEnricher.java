@@ -21,6 +21,7 @@ import java.nio.ByteBuffer;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 import org.apache.commons.lang.ClassUtils;
 
@@ -40,9 +41,15 @@ import com.ginema.api.storage.SensitiveDataRoot;
  * Basic scope of this class is to enrich an
  * 
  * @author mccalv
+ * @param <T>
  *
  */
+
 public class SensitiveDataEnricher {
+  @FunctionalInterface
+  public interface Predicate<T> {
+    boolean test(T t);
+  }
 
   /**
    * Given an object
@@ -55,8 +62,8 @@ public class SensitiveDataEnricher {
       throwIllegalArgumentException();
     }
 
-     SensitiveDataHolder sensitiveDataHolder =new SensitiveDataHolder();
-     sensitiveDataHolder.setDomain(sensitiveDataRoot.name());
+    SensitiveDataHolder sensitiveDataHolder = new SensitiveDataHolder();
+    sensitiveDataHolder.setDomain(sensitiveDataRoot.name());
     try {
 
 
@@ -104,64 +111,116 @@ public class SensitiveDataEnricher {
         if (ClassUtils.isAssignable(f.getType(), SensitiveDataField.class)) {
           f.setAccessible(true);
           populateHolderMapByType(holder, (SensitiveDataField<?>) value);
-          // holder.withField((SensitiveDataField<?>) value);
         }
-        if (value != null && !ReflectionUtils.isJDKClass(value.getClass())
-            && ReflectionUtils.isAssignableFrom(value.getClass(), Object.class)) {
-          enrichObjectTree(value, holder);
-
-        }
-
+        checkAndEnrichObject(holder, value);
+        checkAndEnrichCollection(holder, value);
       }
     }
 
   }
 
-  public static <V> void populateTypedMap(SensitiveDataField<?> value, Map<String, V> map, V v) {
-    // Initializes the map if null
+  @SuppressWarnings("rawtypes")
+  private static void checkAndEnrichCollection(SensitiveDataHolder holder, Object value)
+      throws Exception {
+    if (value != null && ReflectionUtils.isACollection(value)) {
+      for (Object element : (java.util.Collection) value) {
+        checkAndEnrichObject(holder, element);
+      }
+    }
+  }
+
+  private static void checkAndEnrichObject(SensitiveDataHolder holder, Object value)
+      throws Exception {
+    if (value != null && !ReflectionUtils.isJDKClass(value)
+        && ReflectionUtils.isAssignableFrom(value.getClass(), Object.class)) {
+      enrichObjectTree(value, holder);
+
+    }
+  }
+
+  public static <V> void populate(SensitiveDataHolder h, Map<String, V> map,
+      BiConsumer<SensitiveDataHolder, Map<String, V>> biconsumer, String s, V value) {
     if (map == null)
       map = new HashMap<String, V>();
 
-    map.put(value.getIdentifier().getId(), v);
+    map.put(s, value);
+    biconsumer.accept(h, map);
+
 
   }
 
-  private static void populateHolderMapByType(SensitiveDataHolder holder, SensitiveDataField<?> value) {
+  /*
+   * 
+   * @FunctionalInterface public interface BiFunction<T, U, R> { R apply(T t, U u); }
+   * 
+   * public static <V> void populateTypedMapFunctional(SensitiveDataHolder r, SensitiveDataField<?>
+   * value, Consumer<V> consumer, Map<String, V> map, Supplier<V> supplier) {
+   * 
+   * 
+   * BiConsumer<SensitiveDataHolder, Map<String, StringEntry>> studentNameSetter =
+   * SensitiveDataHolder::setStrings;
+   * 
+   * 
+   * 
+   * Consumer<SensitiveDataHolder> studentNameGetter = SensitiveDataHolder::getStrings;
+   * 
+   * 
+   * 
+   * 
+   * BiFunction<SensitiveDataHolder, Map<String, V>, V> initIfNull = (t1, t2) -> { if (t2 == null)
+   * return v; return null; };
+   * 
+   * 
+   * // Initializes the map if null Predicate<Map<String, V>> predicate = t -> t == null |
+   * t.isEmpty(); if (predicate.test(map)) if (map == null) map = new HashMap<String, V>();
+   * map.put(value.getIdentifier().getId(), v);
+   * 
+   * }
+   */
+
+  private static void populateHolderMapByType(SensitiveDataHolder holder,
+      SensitiveDataField<?> value) {
     if (value.getValue() == null)
       return;
     @SuppressWarnings("rawtypes")
     Class clazz = value.getValue().getClass();
+    String id = value.getIdentifier().getId();
+
     if (ClassUtils.isAssignable(clazz, Date.class)) {
-      populateTypedMap(value, holder.getDates(),
-          new DateEntry(value.getIdentifier().getId(), ((Date) value.getValue()).getTime()));
-      return;
+
+      populate(holder, holder.getDates(), SensitiveDataHolder::setDates, id,
+          new DateEntry(id, ((Date) value.getValue()).getTime()));
     }
     if (ClassUtils.isAssignable(clazz, String.class)) {
-      populateTypedMap(value, holder.getStrings(),
-          new StringEntry(value.getIdentifier().getId(), ((String) value.getValue())));
+      System.out.println((String) value.getValue());
+      populate(holder, holder.getStrings(), SensitiveDataHolder::setStrings, id,
+          new StringEntry(id, (String) value.getValue()));
       return;
     }
     if (ClassUtils.isAssignable(clazz, Long.class)) {
-      populateTypedMap(value, holder.getLongs(),
-          new LongEntry(value.getIdentifier().getId(), ((Long) value.getValue())));
+      populate(holder, holder.getLongs(), SensitiveDataHolder::setLongs, id,
+          new LongEntry(id, (Long) value.getValue()));
+
       return;
     }
-  
+
     if (ClassUtils.isAssignable(clazz, Double.class)) {
-      populateTypedMap(value, holder.getDoubles(),
-          new DoubleEntry(value.getIdentifier().getId(), ((Double) value.getValue())));
+      populate(holder, holder.getDoubles(), SensitiveDataHolder::setDoubles, id,
+          new DoubleEntry(id, (Double) value.getValue()));
       return;
     }
 
     if (ClassUtils.isAssignable(clazz, Boolean.class)) {
-      populateTypedMap(value, holder.getBooleans(),
-          new BooleanEntry( value.getIdentifier().getId(),(Boolean) value.getValue()));
+      populate(holder, holder.getBooleans(), SensitiveDataHolder::setBooleans, id,
+          new BooleanEntry(id, (Boolean) value.getValue()));
       return;
     }
     if (ClassUtils.isAssignable(clazz, byte[].class)) {
-      populateTypedMap(value, holder.getBytes(), new BytesEntry(value.getIdentifier().getId(),
-          ByteBuffer.wrap((byte[]) value.getValue())));
+      BytesEntry bytesEntry =
+          new BytesEntry(value.getIdentifier().getId(), ByteBuffer.wrap((byte[]) value.getValue()));
+      populate(holder, holder.getBytes(), SensitiveDataHolder::setBytes, id, bytesEntry);
       return;
+
     }
 
 

@@ -19,8 +19,8 @@ import org.apache.avro.Schema;
 import org.apache.avro.SchemaBuilder;
 
 /**
- * Utility class to manage the specific Avro Schema for Ginema. Schema inside classPathResource ->
- * sensitiveDataHolder.asvc
+ * Utility class to manage the specific Avro Schema for Ginema. The JSON schema is under
+ * classPathResource -> sensitiveDataHolder.asvc
  * 
  * @author mccalv
  *
@@ -381,10 +381,15 @@ public class SchemaHelper {
     return SchemaHelper.getGinemaSchema().toString();
   }
 
+  /**
+   * Returns the Schema from classpath
+   * 
+   * @return
+   * @throws Exception
+   */
   public static Schema getGinemaSchemaFromClassPath() throws Exception {
     InputStream resourceAsStream =
         SchemaHelper.class.getClass().getResourceAsStream("/avro/sensitiveDataHolder.avsc");
-        //System.out.print("AvroSchema loading:"+ClassLoader.getSystemResource("*").getPath() +ClassLoader.getSystemResource("avro/sensitivedataHolder.avsc").getPath());
     return new Schema.Parser().parse(resourceAsStream);
 
   }

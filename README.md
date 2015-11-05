@@ -1,4 +1,8 @@
 # Ginema  
+<a href="https://travis-ci.org/mccalv/ginema">
+<img title="Build Status Images" src="https://travis-ci.org/mccalv/ginema.svg">
+</a>
+
 The central ideal behind "Ginema" is to *decouple the sensitive data from the domain model classes* in order to perform federated search against different datasets and cloud resources. 
 Sensitive date are stored in separated hash based structures and serialized using specific strategies transparent to the domain model.
 ## Getting started:
