@@ -17,11 +17,21 @@
 package com.ginema.api.enricher;
 
 import java.lang.reflect.Field;
+import java.nio.ByteBuffer;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.BiConsumer;
 
 import org.apache.commons.lang.ClassUtils;
 
+import com.ginema.api.avro.BooleanEntry;
+import com.ginema.api.avro.BytesEntry;
+import com.ginema.api.avro.DateEntry;
+import com.ginema.api.avro.DoubleEntry;
+import com.ginema.api.avro.LongEntry;
 import com.ginema.api.avro.SensitiveDataHolder;
+import com.ginema.api.avro.StringEntry;
 import com.ginema.api.reflection.ReflectionUtils;
 import com.ginema.api.storage.SensitiveDataField;
 import com.ginema.api.storage.SensitiveDataID;
@@ -35,60 +45,64 @@ import com.ginema.api.storage.SensitiveDataRoot;
  *
  */
 
-public class SensitiveDataEnricher {
+public class SensitiveDataExtractor {
+  @FunctionalInterface
+  public interface Predicate<T> {
+    boolean test(T t);
+  }
 
   /**
    * Given an object
    * 
    * @param d
    */
-  public static void enrich(SensitiveDataHolder holder, Object o) {
+  public static SensitiveDataHolder extractSensitiveData(Object o) {
     SensitiveDataRoot sensitiveDataRoot = ReflectionUtils.getAnnotation(o, SensitiveDataRoot.class);
     if (sensitiveDataRoot == null) {
       throwIllegalArgumentException();
     }
-    if (sensitiveDataRoot.name().equals(holder.getDomain())) {
-      throwIllegalArgumentException();
-    }
+
+    SensitiveDataHolder sensitiveDataHolder = new SensitiveDataHolder();
+    sensitiveDataHolder.setDomain(sensitiveDataRoot.name());
     try {
 
-      checkId(o, holder);
-      enrichObjectTree(o, holder);
 
+      enrichWithId(o, sensitiveDataHolder);
+      enrichObjectTree(o, sensitiveDataHolder);
+      return sensitiveDataHolder;
     } catch (Exception e) {
       throw new RuntimeException(e.toString(), e);
     }
 
   }
 
-  private static void checkId(Object o, SensitiveDataHolder holder) throws Exception {
-    boolean hasId = false;
+  private static void enrichWithId(Object o, SensitiveDataHolder holder) throws Exception {
+    boolean asId = false;
     for (Field f : o.getClass().getDeclaredFields()) {
       if (!ReflectionUtils.isPrimitive(f)) {
+
         if (ReflectionUtils.isAssignableFrom(f.getType(), SensitiveDataID.class)) {
           f.setAccessible(true);
-          SensitiveDataID sensitiveDataID = (SensitiveDataID) f.get(o);
-          if (!sensitiveDataID.getId().equals(holder.getId())) {
-            throwIllegalArgumentException();
-          }
-          hasId = true;
+
+          holder.setId(((SensitiveDataID) f.get(o)).getId());
+          asId = true;
         }
       }
     }
-    if (!hasId) {
+    if (!asId) {
       throwIllegalArgumentException();
     }
   }
 
+
+
   /**
-   * Enriches the object tree. In case of the collection falls back to each element of the
-   * collection
+   * Recursive method to enrich the object
    * 
    * @param o
    * @param holder
    * @throws IllegalAccessException
    */
-  @SuppressWarnings("rawtypes")
   private static void enrichObjectTree(Object o, SensitiveDataHolder holder) throws Exception {
     for (Field f : o.getClass().getDeclaredFields()) {
       if (!ReflectionUtils.isPrimitive(f)) {
@@ -96,87 +110,86 @@ public class SensitiveDataEnricher {
         Object value = f.get(o);
         if (ClassUtils.isAssignable(f.getType(), SensitiveDataField.class)) {
           f.setAccessible(true);
-          populateHolderMapByType(o, f, (SensitiveDataField<?>) value, holder);
-          // holder.withField((SensitiveDataField<?>) value);
+          populateHolderMapByType(holder, (SensitiveDataField<?>) value);
         }
         checkAndEnrichObject(holder, value);
-        if (value!= null && ReflectionUtils.isACollection(value)) {
-          for (Object element : (java.util.Collection) value) {
-            checkAndEnrichObject(holder, element);
-          }
-
-        }
+        checkAndEnrichCollection(holder, value);
       }
     }
 
   }
 
-  /**
-   * Check if the object is not a primitive or base type and then try to enrich it
-   * 
-   * @param holder
-   * @param value
-   * @throws Exception
-   */
+  @SuppressWarnings("rawtypes")
+  private static void checkAndEnrichCollection(SensitiveDataHolder holder, Object value)
+      throws Exception {
+    if (value != null && ReflectionUtils.isACollection(value)) {
+      for (Object element : (java.util.Collection) value) {
+        checkAndEnrichObject(holder, element);
+      }
+    }
+  }
+
   private static void checkAndEnrichObject(SensitiveDataHolder holder, Object value)
       throws Exception {
-    if (value != null && !ReflectionUtils.isJDKClass(value.getClass())
+    if (value != null && !ReflectionUtils.isJDKClass(value)
         && ReflectionUtils.isAssignableFrom(value.getClass(), Object.class)) {
       enrichObjectTree(value, holder);
 
     }
   }
 
+  public static <V> void populate(SensitiveDataHolder h, Map<String, V> map,
+      BiConsumer<SensitiveDataHolder, Map<String, V>> biconsumer, String s, V value) {
+    if (map == null)
+      map = new HashMap<String, V>();
+
+    map.put(s, value);
+    biconsumer.accept(h, map);
 
 
-  private static <V> void populate(Object obj, Field field, String id, V value) {
-    field.setAccessible(true);
-    try {
-      field.set(obj, new SensitiveDataField<V>(id, value));
-    } catch (Exception ex) {
-      throwIllegalArgumentException(ex);
-    }
   }
 
-  private static void populateHolderMapByType(Object obj, Field field, SensitiveDataField<?> value,
-      SensitiveDataHolder holder) {
-    if (value==null|| value.getValue() == null)
+  private static void populateHolderMapByType(SensitiveDataHolder holder,
+      SensitiveDataField<?> value) {
+    if (value == null || value.getValue() == null)
       return;
     @SuppressWarnings("rawtypes")
     Class clazz = value.getValue().getClass();
     String id = value.getIdentifier().getId();
-
+    String name = value.getName();
     if (ClassUtils.isAssignable(clazz, Date.class)) {
-      populate(obj, field, id, holder.getDates().get(id));
+
+      populate(holder, holder.getDates(), SensitiveDataHolder::setDates, id,
+          new DateEntry(name, ((Date) value.getValue()).getTime()));
     }
     if (ClassUtils.isAssignable(clazz, String.class)) {
-      populate(obj, field, id, holder.getStrings().get(id));
+      populate(holder, holder.getStrings(), SensitiveDataHolder::setStrings, id,
+          new StringEntry(name, (String) value.getValue()));
       return;
     }
     if (ClassUtils.isAssignable(clazz, Long.class)) {
-      populate(obj, field, id, holder.getLongs().get(id));
+      populate(holder, holder.getLongs(), SensitiveDataHolder::setLongs, id,
+          new LongEntry(name, (Long) value.getValue()));
       return;
     }
-
     if (ClassUtils.isAssignable(clazz, Double.class)) {
-      populate(obj, field, id, holder.getDoubles().get(id));
+      populate(holder, holder.getDoubles(), SensitiveDataHolder::setDoubles, id,
+          new DoubleEntry(name, (Double) value.getValue()));
       return;
     }
-
     if (ClassUtils.isAssignable(clazz, Boolean.class)) {
-      populate(obj, field, id, holder.getBooleans().get(id));
+      populate(holder, holder.getBooleans(), SensitiveDataHolder::setBooleans, id,
+          new BooleanEntry(name, (Boolean) value.getValue()));
       return;
     }
     if (ClassUtils.isAssignable(clazz, byte[].class)) {
-      populate(obj, field, id, holder.getBytes().get(id));
+      BytesEntry bytesEntry = new BytesEntry(name, ByteBuffer.wrap((byte[]) value.getValue()));
+      populate(holder, holder.getBytes(), SensitiveDataHolder::setBytes, id, bytesEntry);
       return;
 
     }
-  }
 
-  private static void throwIllegalArgumentException(Exception exception) {
-    throw new IllegalArgumentException(
-        "Exception occuring while enriching: " + exception.getMessage());
+
   }
 
   private static void throwIllegalArgumentException() {
@@ -184,4 +197,5 @@ public class SensitiveDataEnricher {
         "To Enrich Object it has to be marked with " + SensitiveDataRoot.class.getName()
             + " and contains at least one field of type  " + SensitiveDataID.class.getName());
   }
+
 }

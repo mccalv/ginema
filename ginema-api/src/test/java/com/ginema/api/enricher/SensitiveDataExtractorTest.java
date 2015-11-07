@@ -14,7 +14,10 @@
  *******************************************************************************/
 package com.ginema.api.enricher;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+
+import java.util.Date;
 
 import org.junit.Test;
 
@@ -22,9 +25,11 @@ import com.ginema.api.domain.SimpleDomainObject;
 import com.ginema.api.storage.SensitiveDataField;
 import com.ginema.api.storage.SensitiveDataID;
 
-public class EnricherTest {
+public class SensitiveDataExtractorTest {
 
 
+  public static final Date DATE = new Date();
+  public static final Date DATE2 = new Date(DATE.getTime() - 100000L);
 
   @Test
   public void testEnricherSimpleObject() {
@@ -32,29 +37,49 @@ public class EnricherTest {
     s.setId(new SensitiveDataID());
     SensitiveDataField<String> name = new SensitiveDataField<String>("name");
     SensitiveDataField<String> surname = new SensitiveDataField<String>("surname");
-    
+
     SensitiveDataField<String> name2 = new SensitiveDataField<String>("name2");
     SensitiveDataField<String> surname2 = new SensitiveDataField<String>("surname2");
-    
+
     SensitiveDataField<String> name3 = new SensitiveDataField<String>("name3");
     SensitiveDataField<String> surname3 = new SensitiveDataField<String>("surname3");
 
+
+    SensitiveDataField<Date> date = new SensitiveDataField<Date>(DATE);
+    SensitiveDataField<Date> date2 = new SensitiveDataField<Date>(DATE2);
+    s.setDate(date);
+
     s.setName(name);
     s.setSurnname(surname);
-    
+
     SimpleDomainObject s2 = new SimpleDomainObject();
     s2.setName(name2);
     s2.setSurnname(surname2);
-  
+    s2.setDate(date2);
+
     SimpleDomainObject s3 = new SimpleDomainObject();
     s3.setName(name3);
     s3.setSurnname(surname3);
-  
+
     s.addChildren(s2);
     s.addChildren(s3);
-    com.ginema.api.avro.SensitiveDataHolder enrich = SensitiveDataEnricher.enrich(s);
-    assertNotNull(enrich.getStrings().get(name.getIdentifier().getId()));
+   // long time = System.currentTimeMillis();
+    com.ginema.api.avro.SensitiveDataHolder enrich = SensitiveDataExtractor.extractSensitiveData(s);
+    assertNotNull("name", enrich.getStrings().get(name.getIdentifier().getId()));
+    assertNotNull("suname", enrich.getStrings().get(surname.getIdentifier().getId()));
+    assertNotNull("name2", enrich.getStrings().get(name2.getIdentifier().getId()));
+    assertNotNull("suname2", enrich.getStrings().get(surname2.getIdentifier().getId()));
+    assertNotNull("name3", enrich.getStrings().get(name3.getIdentifier().getId()));
+    assertNotNull("suname3", enrich.getStrings().get(surname3.getIdentifier().getId()));
+    assertEquals(Long.valueOf(DATE.getTime()),
+        enrich.getDates().get(date.getIdentifier().getId()).getValue());
+    assertEquals(Long.valueOf(DATE2.getTime()),
+        enrich.getDates().get(date2.getIdentifier().getId()).getValue());
+    long time = System.currentTimeMillis();
+    
     System.out.println(enrich);
+    System.out.println("Enriching time:" +(System.currentTimeMillis()-time));
+    
   }
 
 }

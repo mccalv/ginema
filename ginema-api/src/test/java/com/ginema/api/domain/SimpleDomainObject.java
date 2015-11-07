@@ -14,6 +14,7 @@
 package com.ginema.api.domain;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.ginema.api.storage.SensitiveDataField;
@@ -26,6 +27,22 @@ public class SimpleDomainObject {
   private SensitiveDataID id;
   private SensitiveDataField<String> name;
   private SensitiveDataField<String> surnname;
+  private SensitiveDataField<Date> date;
+
+  /**
+   * @return the date
+   */
+  public SensitiveDataField<Date> getDate() {
+    return date;
+  }
+
+  /**
+   * @param date the date to set
+   */
+  public void setDate(SensitiveDataField<Date> date) {
+    this.date = date;
+  }
+
   private SimpleDomainObject child;
   private List<SimpleDomainObject> children = new ArrayList<SimpleDomainObject>();
 

@@ -49,7 +49,7 @@ public class SensitiveDataField<T> {
       add(String.class);
       add(Date.class);
       add(Boolean.class);
-      //Supported number
+      // Supported number
       add(Integer.class);
       add(Long.class);
       add(Double.class);
@@ -58,10 +58,11 @@ public class SensitiveDataField<T> {
 
     }
   };
-  
- 
+
+
   private SensitiveDataID identifier;
   private T value;
+  private String name;
 
   public SensitiveDataField(T value) {
     this(null, value);
@@ -69,8 +70,26 @@ public class SensitiveDataField<T> {
 
 
 
+  /**
+   * @return the name
+   */
+  public String getName() {
+    return name;
+  }
+
+
+
+  /**
+   * @param name the name to set
+   */
+  public void setName(String name) {
+    this.name = name;
+  }
+
+
+
   public SensitiveDataField(String identifier, T value) {
-    if (!ReflectionUtils.isAssignableFrom(value.getClass(), SUPPORTED_FIELD_TYPES)) {
+    if (value!= null && !ReflectionUtils.isAssignableFrom(value.getClass(), SUPPORTED_FIELD_TYPES)) {
       throw new IllegalArgumentException("Type: " + value.getClass().getName()
           + " not supported. Sensitive data can be only of types:"
           + Arrays.toString(SUPPORTED_FIELD_TYPES.toArray()));

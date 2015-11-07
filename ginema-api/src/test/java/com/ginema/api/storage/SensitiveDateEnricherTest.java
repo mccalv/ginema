@@ -20,13 +20,13 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import com.ginema.api.enricher.SensitiveDataEnricher;
+import com.ginema.api.enricher.SensitiveDataExtractor;
 import com.ginema.api.storage.SensitiveDataField;
 import com.ginema.api.storage.SensitiveDataID;
 import com.ginema.api.storage.SensitiveDataRoot;
 
 /**
- * Junit test for {@link SensitiveDataEnricher}
+ * Junit test for {@link SensitiveDataExtractor}
  * 
  * @author mccalv
  *
@@ -63,6 +63,6 @@ public class SensitiveDateEnricherTest {
   @Test(expected = IllegalArgumentException.class)
   public void testEnrichment() {
 
-    SensitiveDataEnricher.enrich(new DomainObject());
+    SensitiveDataExtractor.extractSensitiveData(new DomainObject());
   }
 }

@@ -21,10 +21,16 @@ The framework supports the process of:
 * Serialization: 
 * Deserialization
 
-The simplest enrichment supported is the one to convert an object and extract its sensitive data fields:
+The simplest enrichment supported is the one to extract from an object its sensitive data fields:
 ```java
-  SensitiveDataHolder enrich = SensitiveDataEnricher.enrich(s);
+  SensitiveDataHolder enrich =  SensitiveDataExtractor.extractSensitiveData(object);
 ```
+The opposite operation is to populate an object with sensitive data
+
+```java
+  SensitiveDataEnricher.enriche(sensitiveDataHolder,object);
+```
+
 The SensitiveDataHolder is an Apache Avro structure language agnostic which can be serialized in any possible enviroment
 [Apache Avro!](https://avro.apache.org/).
 
