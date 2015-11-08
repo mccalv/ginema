@@ -27,8 +27,12 @@
 			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
 		</license>
 	</licenses>
+
+
 	<scm>
-		<url>https://github.com/mccalv/ginema</url>
+		<url>https://github.com/github/maven-plugins</url>
+		<connection>scm:git:git://github.com/github/maven-plugins.git</connection>
+		<developerConnection>scm:git:git@github.com:github/maven-plugins.git</developerConnection>
 	</scm>
 	<developers>
 		<developer>
@@ -53,6 +57,7 @@
 
 	</properties>
 	<dependencies>
+
 		<dependency>
 			<groupId>org.apache.avro</groupId>
 			<artifactId>avro</artifactId>
@@ -106,10 +111,7 @@
 
 			</plugin>
 
-			<!-- <plugin> <groupId>org.jacoco</groupId> <artifactId>jacoco-maven-plugin</artifactId> 
-				<version>0.7.5.201505241946</version> <executions> <execution> <id>default-report</id> 
-				<phase>install</phase> <goals><goal>report</goal></goals> </execution> </executions> 
-				</plugin> -->
+
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -150,6 +152,12 @@
 						<phase>site</phase>
 					</execution>
 				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.3</version>
 			</plugin>
 
 		</plugins>
