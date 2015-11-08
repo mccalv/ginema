@@ -17,6 +17,7 @@
 package com.ginema.api.enricher;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Date;
 
 import org.apache.commons.lang.ClassUtils;
@@ -34,6 +35,7 @@ import com.ginema.api.storage.SensitiveDataRoot;
  * @param <T>
  *
  */
+@SuppressWarnings("unchecked")
 
 public class SensitiveDataEnricher {
 
@@ -66,12 +68,13 @@ public class SensitiveDataEnricher {
     for (Field f : o.getClass().getDeclaredFields()) {
       if (!ReflectionUtils.isPrimitive(f)) {
         if (ReflectionUtils.isAssignableFrom(f.getType(), SensitiveDataID.class)) {
-          f.setAccessible(true);
-          SensitiveDataID sensitiveDataID = (SensitiveDataID) f.get(o);
+         Method m  =  PropertyDescriptorHolder.getGetterMethod(o.getClass(), f.getName());
+         SensitiveDataID sensitiveDataID =(SensitiveDataID)  m.invoke(o, null);
           if (!sensitiveDataID.getId().equals(holder.getId())) {
             throwIllegalArgumentException();
           }
           hasId = true;
+          return;
         }
       }
     }
@@ -92,10 +95,9 @@ public class SensitiveDataEnricher {
   private static void enrichObjectTree(Object o, SensitiveDataHolder holder) throws Exception {
     for (Field f : o.getClass().getDeclaredFields()) {
       if (!ReflectionUtils.isPrimitive(f)) {
-        f.setAccessible(true);
-        Object value = f.get(o);
+        Object value = PropertyDescriptorHolder.getGetterMethod(o.getClass(), f.getName()).invoke(o);
         if (ClassUtils.isAssignable(f.getType(), SensitiveDataField.class)) {
-          f.setAccessible(true);
+          
           populateHolderMapByType(o, f, (SensitiveDataField<?>) value, holder);
           // holder.withField((SensitiveDataField<?>) value);
         }
@@ -129,55 +131,45 @@ public class SensitiveDataEnricher {
 
 
 
-  private static <V> void populate(Object obj, Field field, String id, V value) {
-    field.setAccessible(true);
-    try {
-      field.set(obj, new SensitiveDataField<V>(id, value));
-    } catch (Exception ex) {
-      throwIllegalArgumentException(ex);
-    }
-  }
-
-  private static void populateHolderMapByType(Object obj, Field field, SensitiveDataField<?> value,
+ 
+   private static void populateHolderMapByType(Object obj, Field field, SensitiveDataField value,
       SensitiveDataHolder holder) {
-    if (value==null|| value.getValue() == null)
+    if (value==null|| value.getIdentifier() == null)
       return;
-    @SuppressWarnings("rawtypes")
-    Class clazz = value.getValue().getClass();
+    // Class clazz =value.getValue().getClass();
     String id = value.getIdentifier().getId();
 
-    if (ClassUtils.isAssignable(clazz, Date.class)) {
-      populate(obj, field, id, holder.getDates().get(id));
+    if (holder.getDates()!=null&&holder.getDates().get(id) != null) {
+      value.setValue(new Date(holder.getDates().get(id).getValue()));
+     
     }
-    if (ClassUtils.isAssignable(clazz, String.class)) {
-      populate(obj, field, id, holder.getStrings().get(id));
-      return;
+    if (holder.getStrings()!=null&&holder.getStrings().get(id) != null) {
+      value.setValue(holder.getStrings().get(id).getValue());
+     
     }
-    if (ClassUtils.isAssignable(clazz, Long.class)) {
-      populate(obj, field, id, holder.getLongs().get(id));
-      return;
+    
+    if (holder.getLongs()!=null &&holder.getLongs().get(id) != null) {
+      value.setValue(holder.getLongs().get(id).getValue());
+     
     }
-
-    if (ClassUtils.isAssignable(clazz, Double.class)) {
-      populate(obj, field, id, holder.getDoubles().get(id));
-      return;
+    if (holder.getBooleans()!=null&&holder.getBooleans().get(id) != null) {
+      value.setValue(holder.getBooleans().get(id).getValue());
+     
     }
-
-    if (ClassUtils.isAssignable(clazz, Boolean.class)) {
-      populate(obj, field, id, holder.getBooleans().get(id));
-      return;
+    if (holder.getIntegers()!=null&&holder.getIntegers().get(id) != null) {
+      value.setValue(holder.getIntegers().get(id).getValue());
+     
     }
-    if (ClassUtils.isAssignable(clazz, byte[].class)) {
-      populate(obj, field, id, holder.getBytes().get(id));
-      return;
-
+    if (holder.getBytes()!=null&&holder.getBytes().get(id) != null) {
+      value.setValue(holder.getBytes().get(id).getValue().get());
+     
     }
+    
+    
+    
   }
 
-  private static void throwIllegalArgumentException(Exception exception) {
-    throw new IllegalArgumentException(
-        "Exception occuring while enriching: " + exception.getMessage());
-  }
+ 
 
   private static void throwIllegalArgumentException() {
     throw new IllegalArgumentException(

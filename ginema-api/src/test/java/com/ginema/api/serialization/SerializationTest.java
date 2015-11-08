@@ -19,12 +19,10 @@ package com.ginema.api.serialization;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
-import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 
-import org.apache.avro.Schema;
 import org.apache.avro.file.DataFileReader;
 import org.apache.avro.file.DataFileWriter;
 import org.apache.avro.io.DatumReader;

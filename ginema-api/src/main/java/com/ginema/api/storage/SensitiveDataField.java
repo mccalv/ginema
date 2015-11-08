@@ -100,7 +100,7 @@ public class SensitiveDataField<T> {
     this.identifier = identifier == null ? new SensitiveDataID()
         : new SensitiveDataID(idGenerator.fromString(identifier));
 
-    this.value = value;
+   if(value!=null) this.value = value;
   }
 
 

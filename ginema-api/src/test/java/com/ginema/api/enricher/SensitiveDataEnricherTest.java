@@ -13,32 +13,47 @@ import com.ginema.api.idgenerator.impl.UUIDGenerator;
 import com.ginema.api.storage.SensitiveDataField;
 import com.ginema.api.storage.SensitiveDataID;
 
+import static org.junit.Assert.assertEquals;
+
 public class SensitiveDataEnricherTest {
+  private static final String NAME = "name";
   public static final Date DATE = new Date();
   public static final Date DATE2 = new Date(DATE.getTime() - 100000L);
+
+
+  private final String ID1 = new UUIDGenerator().generate();
+  private final String ID2 = new UUIDGenerator().generate();
 
   @Test
   public void testEnricher() {
 
-    UUIDGenerator generator = new UUIDGenerator();
-    String id1 = generator.generate();
-    String id2 = generator.generate();
+    for (int i = 0; i < 100; i++) {
+      checkEnrichment();
+    }
 
-    SensitiveDataID id = new SensitiveDataID();
 
+
+  }
+
+  private void checkEnrichment() {
     SensitiveDataHolder holder = new SensitiveDataHolder();
+    SensitiveDataID id = new SensitiveDataID();
     holder.setId(id.getId());
     holder.setDates(new HashMap<String, DateEntry>());
     holder.setStrings(new HashMap<String, StringEntry>());
-
-    holder.getDates().put(id1, new DateEntry(null, DATE.getTime()));
-    holder.getStrings().put(id2, new StringEntry(null, "name"));;
+    holder.getDates().put(ID2, new DateEntry(null, DATE.getTime()));
+    holder.getStrings().put(ID1, new StringEntry(null, NAME));;
 
     SimpleDomainObject s = new SimpleDomainObject();
     s.setId(id);
-    s.setName(new SensitiveDataField<String>(id2, null));
-    s.setDate(new SensitiveDataField<Date>(id1, null));
-    SensitiveDataEnricher.enrich(holder, s);
+    s.setName(new SensitiveDataField<String>(ID1, null));
+    s.setDate(new SensitiveDataField<Date>(ID2, null));
 
+    long time = System.nanoTime();
+    SensitiveDataEnricher.enrich(holder, s);
+    time = System.nanoTime() - time;
+    // System.out.println("NanoSeconds:" +time);
+    assertEquals(s.getName().getValue(), NAME);
+    assertEquals(s.getDate().getValue(), DATE);
   }
 }

@@ -24,6 +24,13 @@ import com.ginema.api.storage.SensitiveDataRoot;
 @SensitiveDataRoot(name = "aSimpleObject")
 public class SimpleDomainObject {
 
+  /**
+   * @return the children
+   */
+  public List<SimpleDomainObject> getChildren() {
+    return children;
+  }
+
   private SensitiveDataID id;
   private SensitiveDataField<String> name;
   private SensitiveDataField<String> surnname;

@@ -16,8 +16,12 @@
  */
 package com.ginema.api.reflection;
 
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -43,6 +47,17 @@ public class ReflectionUtils {
     return declaredFields.stream().filter(p -> p.getAnnotation(annotation) != null);
 
 
+  }
+
+
+  public static Method getGetterMethod2(Class clazz, String name) throws IntrospectionException {
+
+    PropertyDescriptor desc[] =
+        Introspector.getBeanInfo(clazz, Object.class).getPropertyDescriptors();
+    for (PropertyDescriptor d : desc) {
+        return d.getReadMethod();
+    }
+    return null;
   }
 
   public static boolean isAssignableFrom(Class c, Set<Class> allowedClasses) {

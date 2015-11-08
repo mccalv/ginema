@@ -30,23 +30,66 @@ public class SensitiveDataExtractorTest {
 
   public static final Date DATE = new Date();
   public static final Date DATE2 = new Date(DATE.getTime() - 100000L);
+  public static final String NAME1 = "name";
+
+  public static final String SURNAME1 = "surname";
+
+
+  public static final String NAME2 = "name2";
+  public static final String SURNAME2 = "surname2";
+
+  public static final String NAME3 = "name3";
+  public static final String SURNAME3 = "surname3";
 
   @Test
   public void testEnricherSimpleObject() {
-    SimpleDomainObject s = new SimpleDomainObject();
-    s.setId(new SensitiveDataID());
-    SensitiveDataField<String> name = new SensitiveDataField<String>("name");
-    SensitiveDataField<String> surname = new SensitiveDataField<String>("surname");
+  
+    SensitiveDataField<String> name = new SensitiveDataField<String>(NAME1);
+    SensitiveDataField<String> surname = new SensitiveDataField<String>(SURNAME1);
 
-    SensitiveDataField<String> name2 = new SensitiveDataField<String>("name2");
-    SensitiveDataField<String> surname2 = new SensitiveDataField<String>("surname2");
+    SensitiveDataField<String> name2 = new SensitiveDataField<String>(NAME2);
+    SensitiveDataField<String> surname2 = new SensitiveDataField<String>(SURNAME2);
 
-    SensitiveDataField<String> name3 = new SensitiveDataField<String>("name3");
-    SensitiveDataField<String> surname3 = new SensitiveDataField<String>("surname3");
+    SensitiveDataField<String> name3 = new SensitiveDataField<String>(NAME3);
+    SensitiveDataField<String> surname3 = new SensitiveDataField<String>(SURNAME3);
 
 
     SensitiveDataField<Date> date = new SensitiveDataField<Date>(DATE);
     SensitiveDataField<Date> date2 = new SensitiveDataField<Date>(DATE2);
+   
+    // long time = System.currentTimeMillis();
+
+    for (int i = 0; i < 100; i++) {
+      SimpleDomainObject s =
+          buildObject(name, surname, name2, surname2, name3, surname3, date, date2);
+     
+      long time = System.currentTimeMillis();
+      com.ginema.api.avro.SensitiveDataHolder enrich =
+          SensitiveDataExtractor.extractSensitiveData(s);
+     // System.out.println("Enriching time:" + (System.currentTimeMillis() - time));
+
+      assertNotNull(NAME1, enrich.getStrings().get(name.getIdentifier().getId()));
+      assertNotNull(SURNAME1, enrich.getStrings().get(surname.getIdentifier().getId()));
+      assertNotNull(NAME3, enrich.getStrings().get(name2.getIdentifier().getId()));
+      assertNotNull(SURNAME2, enrich.getStrings().get(surname2.getIdentifier().getId()));
+      assertNotNull(NAME3, enrich.getStrings().get(name3.getIdentifier().getId()));
+      assertNotNull(SURNAME3, enrich.getStrings().get(surname3.getIdentifier().getId()));
+      assertEquals(Long.valueOf(DATE.getTime()),
+          enrich.getDates().get(date.getIdentifier().getId()).getValue());
+      assertEquals(Long.valueOf(DATE2.getTime()),
+          enrich.getDates().get(date2.getIdentifier().getId()).getValue());
+
+    }
+  }
+
+  private SimpleDomainObject buildObject(SensitiveDataField<String> name,
+      SensitiveDataField<String> surname, SensitiveDataField<String> name2,
+      SensitiveDataField<String> surname2, SensitiveDataField<String> name3,
+      SensitiveDataField<String> surname3, SensitiveDataField<Date> date,
+      SensitiveDataField<Date> date2) {
+    SimpleDomainObject s = new SimpleDomainObject();
+    s.setId(new SensitiveDataID());
+  
     s.setDate(date);
 
     s.setName(name);
@@ -63,23 +106,7 @@ public class SensitiveDataExtractorTest {
 
     s.addChildren(s2);
     s.addChildren(s3);
-   // long time = System.currentTimeMillis();
-    com.ginema.api.avro.SensitiveDataHolder enrich = SensitiveDataExtractor.extractSensitiveData(s);
-    assertNotNull("name", enrich.getStrings().get(name.getIdentifier().getId()));
-    assertNotNull("suname", enrich.getStrings().get(surname.getIdentifier().getId()));
-    assertNotNull("name2", enrich.getStrings().get(name2.getIdentifier().getId()));
-    assertNotNull("suname2", enrich.getStrings().get(surname2.getIdentifier().getId()));
-    assertNotNull("name3", enrich.getStrings().get(name3.getIdentifier().getId()));
-    assertNotNull("suname3", enrich.getStrings().get(surname3.getIdentifier().getId()));
-    assertEquals(Long.valueOf(DATE.getTime()),
-        enrich.getDates().get(date.getIdentifier().getId()).getValue());
-    assertEquals(Long.valueOf(DATE2.getTime()),
-        enrich.getDates().get(date2.getIdentifier().getId()).getValue());
-    long time = System.currentTimeMillis();
-    
-    System.out.println(enrich);
-    System.out.println("Enriching time:" +(System.currentTimeMillis()-time));
-    
+    return s;
   }
 
 }

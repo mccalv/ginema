@@ -16,7 +16,11 @@
  */
 package com.ginema.api.enricher;
 
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.util.Date;
 import java.util.HashMap;
@@ -46,10 +50,7 @@ import com.ginema.api.storage.SensitiveDataRoot;
  */
 
 public class SensitiveDataExtractor {
-  @FunctionalInterface
-  public interface Predicate<T> {
-    boolean test(T t);
-  }
+
 
   /**
    * Given an object
@@ -78,13 +79,13 @@ public class SensitiveDataExtractor {
 
   private static void enrichWithId(Object o, SensitiveDataHolder holder) throws Exception {
     boolean asId = false;
-    for (Field f : o.getClass().getDeclaredFields()) {
-      if (!ReflectionUtils.isPrimitive(f)) {
+    for (Field field : o.getClass().getDeclaredFields()) {
+      if (!ReflectionUtils.isPrimitive(field)) {
 
-        if (ReflectionUtils.isAssignableFrom(f.getType(), SensitiveDataID.class)) {
-          f.setAccessible(true);
+        if (ReflectionUtils.isAssignableFrom(field.getType(), SensitiveDataID.class)) {
+          Method getter = PropertyDescriptorHolder.getGetterMethod(o.getClass(), field.getName());
+          holder.setId(((SensitiveDataID) getter.invoke(o, null)).getId());
 
-          holder.setId(((SensitiveDataID) f.get(o)).getId());
           asId = true;
         }
       }
@@ -106,10 +107,15 @@ public class SensitiveDataExtractor {
   private static void enrichObjectTree(Object o, SensitiveDataHolder holder) throws Exception {
     for (Field f : o.getClass().getDeclaredFields()) {
       if (!ReflectionUtils.isPrimitive(f)) {
-        f.setAccessible(true);
-        Object value = f.get(o);
+        Method getter = PropertyDescriptorHolder.getGetterMethod(o.getClass(), f.getName());
+        if (getter == null && !java.lang.reflect.Modifier.isStatic(f.getModifiers())) {
+          throw new IllegalArgumentException("No getter found for property " + f.getName());
+        }
+        if (getter == null)
+          continue;
+        Object value = getter.invoke(o, null);
+
         if (ClassUtils.isAssignable(f.getType(), SensitiveDataField.class)) {
-          f.setAccessible(true);
           populateHolderMapByType(holder, (SensitiveDataField<?>) value);
         }
         checkAndEnrichObject(holder, value);
