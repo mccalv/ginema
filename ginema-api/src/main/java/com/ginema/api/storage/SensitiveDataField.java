@@ -37,8 +37,8 @@ import com.ginema.api.reflection.ReflectionUtils;
  * <li>Integer
  * <li>bytes[].
  * </ul>
- * The holder contains the wrapped sensitive value and the {@link SensitiveDataID} which contains the
- * hash
+ * The holder contains the wrapped sensitive value and the {@link SensitiveDataID} which contains
+ * the hash
  * 
  * @author mccalv
  *
@@ -67,10 +67,6 @@ public class SensitiveDataField<T> {
   private T value;
   private String name;
 
-  public SensitiveDataField(T value) {
-    this(null, value);
-  }
-
 
 
   /**
@@ -89,9 +85,12 @@ public class SensitiveDataField<T> {
     this.name = name;
   }
 
-
+  public SensitiveDataField(T value) {
+    this(null, value);
+  }
 
   public SensitiveDataField(String identifier, T value) {
+   
     if (value != null
         && !ReflectionUtils.isAssignableFrom(value.getClass(), SUPPORTED_FIELD_TYPES)) {
       throw new IllegalArgumentException("Type: " + value.getClass().getName()
@@ -99,13 +98,19 @@ public class SensitiveDataField<T> {
           + Arrays.toString(SUPPORTED_FIELD_TYPES.toArray()));
     }
 
+    checkOrSetId(identifier);
+
+    if (value != null)
+      this.value = value;
+  }
+
+
+
+  private void checkOrSetId(String identifier) {
     IDGenerator idGenerator = Configuration.getIDGenerator();
     // Generates the Id or verify it and assign to value
     this.identifier = identifier == null ? new SensitiveDataID()
         : new SensitiveDataID(idGenerator.fromString(identifier));
-
-    if (value != null)
-      this.value = value;
   }
 
 

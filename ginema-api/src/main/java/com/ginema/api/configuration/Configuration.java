@@ -54,4 +54,11 @@ public class Configuration {
     return idGenerator;
   }
 
+  public static void resetGenerator() {
+    synchronized (Configuration.class) {
+      idGenerator = null;
+    }
+
+  }
+
 }

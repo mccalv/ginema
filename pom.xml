@@ -79,7 +79,7 @@
 
 	<modules>
 		<module>ginema-api</module>
-		<module>ginema-crypt</module>
+		<module>ginema-crypto</module>
 	</modules>
 	<build>
 

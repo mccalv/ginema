@@ -16,8 +16,15 @@
  */
 package com.ginema.api.configuration;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.ginema.api.idgenerator.impl.RandomIDGenerator;
 
 /**
  * Test the {@link Configuration} when a system property is defined and the defaul generator is
@@ -26,9 +33,10 @@ import org.junit.Test;
  * @author mccalv
  *
  */
-public class ConfigurationWithoutPropertyTest {
+public class ConfigurationWithPropertyGenerationTest {
   @Before
   public void setProperty() {
+    Configuration.resetGenerator();
     System.setProperty("com.ginema.idgenerator",
         "com.ginema.api.idgenerator.impl.RandomIDGenerator"); // Already
 
@@ -39,12 +47,19 @@ public class ConfigurationWithoutPropertyTest {
     String generated = Configuration.getIDGenerator().generate();
     System.out.println(generated);
     
-    /*
+ 
     assertTrue(Configuration.getIDGenerator() instanceof RandomIDGenerator);
     assertNotNull(generated);
     assertEquals(generated, Configuration.getIDGenerator().fromString(generated));
     assertEquals(generated, Configuration.getIDGenerator().fromString(generated));
-*/
+
+  }
+  @After
+  public void setDefaulProperty() {
+    Configuration.resetGenerator();
+    System.setProperty("com.ginema.idgenerator",
+        "com.ginema.api.idgenerator.impl.UUIDGenerator"); // Already
+
   }
 
 }

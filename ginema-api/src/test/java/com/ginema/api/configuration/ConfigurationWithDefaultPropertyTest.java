@@ -31,7 +31,7 @@ import com.ginema.api.idgenerator.impl.UUIDGenerator;
  * @author mccalv
  *
  */
-public class ConfigurationWithPropertyTest {
+public class ConfigurationWithDefaultPropertyTest {
   @Test
   public void shouldApplyConfigurationTest() {
     String generate = Configuration.getIDGenerator().generate();
