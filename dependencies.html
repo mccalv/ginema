@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>ginema-api - Project Dependencies</title>
+    <title>ginema-crypt - Project Dependencies</title>
     <style type="text/css" media="all">
       @import url("./css/maven-base.css");
       @import url("./css/maven-theme.css");
@@ -17,7 +17,7 @@
   <body class="composite">
     <div id="banner">
                     <div id="bannerLeft">
-                ginema-api
+                ginema-crypt
                 </div>
                     <div class="clear">
         <hr/>
@@ -30,7 +30,7 @@
         <span id="publishDate">Last Published: 2015-11-08</span>
                   &nbsp;| <span id="projectVersion">Version: 1.0-SNAPSHOT</span>
                       </div>
-            <div class="xright">                    <a href="./" title="ginema-api">ginema-api</a>
+            <div class="xright">                    <a href="./" title="ginema-crypt">ginema-crypt</a>
               
                     
       </div>
@@ -112,17 +112,29 @@
 <th>Type</th>
 <th>License</th></tr>
 <tr class="b">
+<td>com.ginema</td>
+<td><a class="externalLink" href="http://maven.apache.org">ginema-api</a></td>
+<td>1.0-SNAPSHOT</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></td></tr>
+<tr class="a">
 <td>commons-lang</td>
 <td><a class="externalLink" href="http://commons.apache.org/lang/">commons-lang</a></td>
 <td>2.6</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.apache.avro</td>
 <td><a class="externalLink" href="http://avro.apache.org">avro</a></td>
 <td>1.7.7</td>
 <td>jar</td>
-<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr></table></div><a name="Project_Dependencies_test"></a>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
+<tr class="a">
+<td>org.bouncycastle</td>
+<td><a class="externalLink" href="http://www.bouncycastle.org/java.html">bcpg-jdk16</a></td>
+<td>1.46</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.bouncycastle.org/licence.html">Bouncy Castle Licence</a>-<a class="externalLink" href="http://www.apache.org/licenses/LICENSE-1.1">Apache Software License, Version 1.1</a></td></tr></table></div><a name="Project_Dependencies_test"></a>
 <div class="section">
 <h3>test<a name="test"></a></h3>
 <p>The following is a list of test dependencies for this project. These dependencies are only required to compile and run unit tests for the application:</p>
@@ -165,30 +177,36 @@
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
 <tr class="b">
+<td>org.bouncycastle</td>
+<td><a class="externalLink" href="http://www.bouncycastle.org/java.html">bcprov-jdk16</a></td>
+<td>1.46</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.bouncycastle.org/licence.html">Bouncy Castle Licence</a></td></tr>
+<tr class="a">
 <td>org.codehaus.jackson</td>
 <td><a class="externalLink" href="http://jackson.codehaus.org">jackson-core-asl</a></td>
 <td>1.9.13</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.codehaus.jackson</td>
 <td><a class="externalLink" href="http://jackson.codehaus.org">jackson-mapper-asl</a></td>
 <td>1.9.13</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.slf4j</td>
 <td><a class="externalLink" href="http://www.slf4j.org">slf4j-api</a></td>
 <td>1.6.4</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.tukaani</td>
 <td><a class="externalLink" href="http://tukaani.org/xz/java.html">xz</a></td>
 <td>1.0</td>
 <td>jar</td>
 <td>Public Domain</td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.xerial.snappy</td>
 <td><a class="externalLink" href="http://github.com/xerial/snappy-java/">snappy-java</a></td>
 <td>1.0.5</td>
@@ -232,7 +250,17 @@
 <div class="section">
 <h3>Dependency Tree<a name="Dependency_Tree"></a></h3>
 <ul>
-<li>com.ginema:ginema-api:jar:1.0-SNAPSHOT <img id="_img1" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep0', '_img1' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep0" style="display:none">
+<li>com.ginema:ginema-crypt:jar:1.0-SNAPSHOT <img id="_img1" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep0', '_img1' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep0" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>ginema-crypt</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>There is currently no description associated with this project.</p>
+<p><b>URL: </b><a class="externalLink" href="https://github.com/mccalv/ginema/ginema-crypt">https://github.com/mccalv/ginema/ginema-crypt</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></p></td></tr></table></div>
+<ul>
+<li>com.ginema:ginema-api:jar:1.0-SNAPSHOT (compile) <img id="_img3" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep2', '_img3' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep2" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>ginema-api</th></tr>
@@ -240,9 +268,27 @@
 <td>
 <p><b>Description: </b>There is currently no description associated with this project.</p>
 <p><b>URL: </b><a class="externalLink" href="http://maven.apache.org">http://maven.apache.org</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></p></td></tr></table></div>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></p></td></tr></table></div></li>
+<li>org.bouncycastle:bcpg-jdk16:jar:1.46 (compile) <img id="_img5" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep4', '_img5' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep4" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Bouncy Castle OpenPGP API</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>The Bouncy Castle Java API for handling the OpenPGP protocol. This jar contains the OpenPGP API for JDK 1.6. The APIs can be used in conjunction with a JCE/JCA provider such as the one provided with the Bouncy Castle Cryptography APIs.</p>
+<p><b>URL: </b><a class="externalLink" href="http://www.bouncycastle.org/java.html">http://www.bouncycastle.org/java.html</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.bouncycastle.org/licence.html">Bouncy Castle Licence</a>, <a class="externalLink" href="http://www.apache.org/licenses/LICENSE-1.1">Apache Software License, Version 1.1</a></p></td></tr></table></div>
 <ul>
-<li>org.apache.avro:avro:jar:1.7.7 (compile) <img id="_img3" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep2', '_img3' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep2" style="display:none">
+<li>org.bouncycastle:bcprov-jdk16:jar:1.46 (compile) <img id="_img7" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep6', '_img7' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep6" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Bouncy Castle Provider</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>The Bouncy Castle Crypto package is a Java implementation of cryptographic algorithms. This jar contains JCE provider and lightweight API for the Bouncy Castle Cryptography APIs for JDK 1.6.</p>
+<p><b>URL: </b><a class="externalLink" href="http://www.bouncycastle.org/java.html">http://www.bouncycastle.org/java.html</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.bouncycastle.org/licence.html">Bouncy Castle Licence</a></p></td></tr></table></div></li></ul></li>
+<li>org.apache.avro:avro:jar:1.7.7 (compile) <img id="_img9" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep8', '_img9' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep8" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Apache Avro</th></tr>
@@ -252,7 +298,7 @@
 <p><b>URL: </b><a class="externalLink" href="http://avro.apache.org">http://avro.apache.org</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div>
 <ul>
-<li>org.codehaus.jackson:jackson-core-asl:jar:1.9.13 (compile) <img id="_img5" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep4', '_img5' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep4" style="display:none">
+<li>org.codehaus.jackson:jackson-core-asl:jar:1.9.13 (compile) <img id="_img11" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep10', '_img11' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep10" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Jackson</th></tr>
@@ -261,7 +307,7 @@
 <p><b>Description: </b>Jackson is a high-performance JSON processor (parser, generator)</p>
 <p><b>URL: </b><a class="externalLink" href="http://jackson.codehaus.org">http://jackson.codehaus.org</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
-<li>org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13 (compile) <img id="_img7" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep6', '_img7' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep6" style="display:none">
+<li>org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13 (compile) <img id="_img13" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep12', '_img13' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep12" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Data Mapper for Jackson</th></tr>
@@ -271,7 +317,7 @@
 built on Jackson JSON processor</p>
 <p><b>URL: </b><a class="externalLink" href="http://jackson.codehaus.org">http://jackson.codehaus.org</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
-<li>com.thoughtworks.paranamer:paranamer:jar:2.3 (compile) <img id="_img9" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep8', '_img9' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep8" style="display:none">
+<li>com.thoughtworks.paranamer:paranamer:jar:2.3 (compile) <img id="_img15" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep14', '_img15' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep14" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>ParaNamer Core</th></tr>
@@ -280,7 +326,7 @@ built on Jackson JSON processor</p>
 <p><b>Description: </b>Paranamer allows runtime access to constructor and method parameter names for Java classes</p>
 <p><b>URL: </b><a class="externalLink" href="http://paranamer.codehaus.org/paranamer">http://paranamer.codehaus.org/paranamer</a></p>
 <p><b>Project License: </b><a href="LICENSE.txt">BSD</a></p></td></tr></table></div></li>
-<li>org.xerial.snappy:snappy-java:jar:1.0.5 (compile) <img id="_img11" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep10', '_img11' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep10" style="display:none">
+<li>org.xerial.snappy:snappy-java:jar:1.0.5 (compile) <img id="_img17" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep16', '_img17' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep16" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Snappy for Java</th></tr>
@@ -289,7 +335,7 @@ built on Jackson JSON processor</p>
 <p><b>Description: </b>snappy-java: A fast compression/decompression library</p>
 <p><b>URL: </b><a class="externalLink" href="http://github.com/xerial/snappy-java/">http://github.com/xerial/snappy-java/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
-<li>org.apache.commons:commons-compress:jar:1.4.1 (compile) <img id="_img13" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep12', '_img13' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep12" style="display:none">
+<li>org.apache.commons:commons-compress:jar:1.4.1 (compile) <img id="_img19" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep18', '_img19' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep18" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Commons Compress</th></tr>
@@ -300,7 +346,7 @@ These include: bzip2, gzip, pack200, xz and ar, cpio, jar, tar, zip, dump.</p>
 <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/compress/">http://commons.apache.org/compress/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div>
 <ul>
-<li>org.tukaani:xz:jar:1.0 (compile) <img id="_img15" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep14', '_img15' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep14" style="display:none">
+<li>org.tukaani:xz:jar:1.0 (compile) <img id="_img21" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep20', '_img21' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep20" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>XZ for Java</th></tr>
@@ -309,7 +355,7 @@ These include: bzip2, gzip, pack200, xz and ar, cpio, jar, tar, zip, dump.</p>
 <p><b>Description: </b>XZ data compression</p>
 <p><b>URL: </b><a class="externalLink" href="http://tukaani.org/xz/java.html">http://tukaani.org/xz/java.html</a></p>
 <p><b>Project License: </b>Public Domain</p></td></tr></table></div></li></ul></li>
-<li>org.slf4j:slf4j-api:jar:1.6.4 (compile) <img id="_img17" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep16', '_img17' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep16" style="display:none">
+<li>org.slf4j:slf4j-api:jar:1.6.4 (compile) <img id="_img23" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep22', '_img23' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep22" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>SLF4J API Module</th></tr>
@@ -318,7 +364,7 @@ These include: bzip2, gzip, pack200, xz and ar, cpio, jar, tar, zip, dump.</p>
 <p><b>Description: </b>The slf4j API</p>
 <p><b>URL: </b><a class="externalLink" href="http://www.slf4j.org">http://www.slf4j.org</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></p></td></tr></table></div></li></ul></li>
-<li>commons-lang:commons-lang:jar:2.6 (compile) <img id="_img19" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep18', '_img19' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep18" style="display:none">
+<li>commons-lang:commons-lang:jar:2.6 (compile) <img id="_img25" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep24', '_img25' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep24" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Commons Lang</th></tr>
@@ -329,7 +375,7 @@ These include: bzip2, gzip, pack200, xz and ar, cpio, jar, tar, zip, dump.</p>
         standard as to justify existence in java.lang.</p>
 <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/lang/">http://commons.apache.org/lang/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
-<li>junit:junit:jar:4.12 (test) <img id="_img21" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep20', '_img21' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep20" style="display:none">
+<li>junit:junit:jar:4.12 (test) <img id="_img27" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep26', '_img27' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep26" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>JUnit</th></tr>
@@ -339,7 +385,7 @@ These include: bzip2, gzip, pack200, xz and ar, cpio, jar, tar, zip, dump.</p>
 <p><b>URL: </b><a class="externalLink" href="http://junit.org">http://junit.org</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License 1.0</a></p></td></tr></table></div>
 <ul>
-<li>org.hamcrest:hamcrest-core:jar:1.3 (test) <img id="_img23" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep22', '_img23' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep22" style="display:none">
+<li>org.hamcrest:hamcrest-core:jar:1.3 (test) <img id="_img29" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep28', '_img29' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep28" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Hamcrest Core</th></tr>
@@ -352,11 +398,13 @@ These include: bzip2, gzip, pack200, xz and ar, cpio, jar, tar, zip, dump.</p>
 <h2>Licenses<a name="Licenses"></a></h2>
 <p><b>BSD: </b>ParaNamer Core</p>
 <p><b>Eclipse Public License 1.0: </b>JUnit</p>
+<p><b>Apache Software License, Version 1.1: </b>Bouncy Castle OpenPGP API</p>
 <p><b>MIT License: </b>SLF4J API Module</p>
-<p><b>Apache License, Version 2.0: </b>ginema-api</p>
+<p><b>Apache License, Version 2.0: </b>ginema-api, ginema-crypt</p>
 <p><b>Public Domain: </b>XZ for Java</p>
 <p><b>New BSD License: </b>Hamcrest Core</p>
-<p><b>The Apache Software License, Version 2.0: </b>Apache Avro, Commons Compress, Commons Lang, Data Mapper for Jackson, Jackson, Snappy for Java</p></div><a name="Dependency_File_Details"></a>
+<p><b>The Apache Software License, Version 2.0: </b>Apache Avro, Commons Compress, Commons Lang, Data Mapper for Jackson, Jackson, Snappy for Java</p>
+<p><b>Bouncy Castle Licence: </b>Bouncy Castle OpenPGP API, Bouncy Castle Provider</p></div><a name="Dependency_File_Details"></a>
 <div class="section">
 <h2>Dependency File Details<a name="Dependency_File_Details"></a></h2>
 <table border="0" class="bodyTable">
@@ -370,6 +418,15 @@ These include: bzip2, gzip, pack200, xz and ar, cpio, jar, tar, zip, dump.</p>
 <th title="Indicates whether these dependencies have been compiled with debug information.">Debug Information</th>
 <th>Sealed</th></tr>
 <tr class="b">
+<td>ginema-api-1.0-SNAPSHOT.jar</td>
+<td>52.20 kB</td>
+<td>59</td>
+<td>38</td>
+<td>7</td>
+<td>1.6</td>
+<td>Yes</td>
+<td>-</td></tr>
+<tr class="a">
 <td>paranamer-2.3.jar</td>
 <td>29.56 kB</td>
 <td>25</td>
@@ -378,7 +435,7 @@ These include: bzip2, gzip, pack200, xz and ar, cpio, jar, tar, zip, dump.</p>
 <td>1.5</td>
 <td>Yes</td>
 <td>-</td></tr>
-<tr class="a">
+<tr class="b">
 <td>commons-lang-2.6.jar</td>
 <td>284.22 kB</td>
 <td>155</td>
@@ -387,7 +444,7 @@ These include: bzip2, gzip, pack200, xz and ar, cpio, jar, tar, zip, dump.</p>
 <td>1.3</td>
 <td>Yes</td>
 <td>-</td></tr>
-<tr class="b">
+<tr class="a">
 <td>junit-4.12.jar</td>
 <td>314.93 kB</td>
 <td>323</td>
@@ -396,7 +453,7 @@ These include: bzip2, gzip, pack200, xz and ar, cpio, jar, tar, zip, dump.</p>
 <td>1.5</td>
 <td>Yes</td>
 <td>-</td></tr>
-<tr class="a">
+<tr class="b">
 <td>avro-1.7.7.jar</td>
 <td>436.30 kB</td>
 <td>342</td>
@@ -405,7 +462,7 @@ These include: bzip2, gzip, pack200, xz and ar, cpio, jar, tar, zip, dump.</p>
 <td>1.6</td>
 <td>Yes</td>
 <td>-</td></tr>
-<tr class="b">
+<tr class="a">
 <td>commons-compress-1.4.1.jar</td>
 <td>241.37 kB</td>
 <td>156</td>
@@ -414,7 +471,25 @@ These include: bzip2, gzip, pack200, xz and ar, cpio, jar, tar, zip, dump.</p>
 <td>1.5</td>
 <td>Yes</td>
 <td>-</td></tr>
+<tr class="b">
+<td>bcpg-jdk16-1.46.jar</td>
+<td>174.07 kB</td>
+<td>139</td>
+<td>127</td>
+<td>6</td>
+<td>1.6</td>
+<td>No</td>
+<td>-</td></tr>
 <tr class="a">
+<td>bcprov-jdk16-1.46.jar</td>
+<td>1.88 MB</td>
+<td>1636</td>
+<td>1547</td>
+<td>82</td>
+<td>1.6</td>
+<td>No</td>
+<td>-</td></tr>
+<tr class="b">
 <td>jackson-core-asl-1.9.13.jar</td>
 <td>232.25 kB</td>
 <td>137</td>
@@ -423,7 +498,7 @@ These include: bzip2, gzip, pack200, xz and ar, cpio, jar, tar, zip, dump.</p>
 <td>1.5</td>
 <td>Yes</td>
 <td>-</td></tr>
-<tr class="b">
+<tr class="a">
 <td>jackson-mapper-asl-1.9.13.jar</td>
 <td>780.66 kB</td>
 <td>529</td>
@@ -432,7 +507,7 @@ These include: bzip2, gzip, pack200, xz and ar, cpio, jar, tar, zip, dump.</p>
 <td>1.5</td>
 <td>Yes</td>
 <td>-</td></tr>
-<tr class="a">
+<tr class="b">
 <td>hamcrest-core-1.3.jar</td>
 <td>45.02 kB</td>
 <td>52</td>
@@ -441,7 +516,7 @@ These include: bzip2, gzip, pack200, xz and ar, cpio, jar, tar, zip, dump.</p>
 <td>1.5</td>
 <td>Yes</td>
 <td>-</td></tr>
-<tr class="b">
+<tr class="a">
 <td>slf4j-api-1.6.4.jar</td>
 <td>25.96 kB</td>
 <td>34</td>
@@ -450,7 +525,7 @@ These include: bzip2, gzip, pack200, xz and ar, cpio, jar, tar, zip, dump.</p>
 <td>1.3</td>
 <td>Yes</td>
 <td>-</td></tr>
-<tr class="a">
+<tr class="b">
 <td>xz-1.0.jar</td>
 <td>94.67 kB</td>
 <td>115</td>
@@ -459,7 +534,7 @@ These include: bzip2, gzip, pack200, xz and ar, cpio, jar, tar, zip, dump.</p>
 <td>1.4</td>
 <td>No</td>
 <td>sealed</td></tr>
-<tr class="b">
+<tr class="a">
 <th>Total</th>
 <th>Size</th>
 <th>Entries</th>
@@ -468,25 +543,25 @@ These include: bzip2, gzip, pack200, xz and ar, cpio, jar, tar, zip, dump.</p>
 <th>Java Version</th>
 <th>Debug Information</th>
 <th>Sealed</th></tr>
-<tr class="a">
-<td>10</td>
-<td>2.48 MB</td>
-<td>1868</td>
-<td>1676</td>
-<td>105</td>
-<td>1.6</td>
-<td>9</td>
-<td>1</td></tr>
 <tr class="b">
-<td>compile: 8</td>
-<td>compile: 2.12 MB</td>
-<td>compile: 1493</td>
-<td>compile: 1345</td>
-<td>compile: 72</td>
-<td>-</td>
-<td>compile: 7</td>
-<td>compile: 1</td></tr>
+<td>13</td>
+<td>4.59 MB</td>
+<td>3702</td>
+<td>3388</td>
+<td>200</td>
+<td>1.6</td>
+<td>10</td>
+<td>1</td></tr>
 <tr class="a">
+<td>compile: 11</td>
+<td>compile: 4.23 MB</td>
+<td>compile: 3327</td>
+<td>compile: 3057</td>
+<td>compile: 167</td>
+<td>-</td>
+<td>compile: 8</td>
+<td>compile: 1</td></tr>
+<tr class="b">
 <td>test: 2</td>
 <td>test: 359.96 kB</td>
 <td>test: 375</td>
@@ -543,80 +618,98 @@ These include: bzip2, gzip, pack200, xz and ar, cpio, jar, tar, zip, dump.</p>
 <th>innovationengineering</th>
 <th>apache.snapshots</th></tr>
 <tr class="b">
+<td>com.ginema:ginema-api:jar:1.0-SNAPSHOT</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
+<tr class="a">
 <td>com.thoughtworks.paranamer:paranamer:jar:2.3</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/com/thoughtworks/paranamer/paranamer/2.3/paranamer-2.3.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
 <td>-</td>
 <td>-</td>
 <td>-</td></tr>
-<tr class="a">
+<tr class="b">
 <td>commons-lang:commons-lang:jar:2.6</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/commons-lang/commons-lang/2.6/commons-lang-2.6.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
 <td>-</td>
 <td>-</td>
 <td>-</td></tr>
-<tr class="b">
+<tr class="a">
 <td>junit:junit:jar:4.12</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/junit/junit/4.12/junit-4.12.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
 <td>-</td>
 <td>-</td>
 <td>-</td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.apache.avro:avro:jar:1.7.7</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/apache/avro/avro/1.7.7/avro-1.7.7.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
 <td>-</td>
 <td>-</td>
 <td>-</td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.apache.commons:commons-compress:jar:1.4.1</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.4.1/commons-compress-1.4.1.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
 <td>-</td>
 <td>-</td>
 <td>-</td></tr>
+<tr class="b">
+<td>org.bouncycastle:bcpg-jdk16:jar:1.46</td>
+<td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/bouncycastle/bcpg-jdk16/1.46/bcpg-jdk16-1.46.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
 <tr class="a">
+<td>org.bouncycastle:bcprov-jdk16:jar:1.46</td>
+<td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk16/1.46/bcprov-jdk16-1.46.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
+<tr class="b">
 <td>org.codehaus.jackson:jackson-core-asl:jar:1.9.13</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/codehaus/jackson/jackson-core-asl/1.9.13/jackson-core-asl-1.9.13.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
 <td>-</td>
 <td>-</td>
 <td>-</td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
 <td>-</td>
 <td>-</td>
 <td>-</td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.hamcrest:hamcrest-core:jar:1.3</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
 <td>-</td>
 <td>-</td>
 <td>-</td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.slf4j:slf4j-api:jar:1.6.4</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
 <td>-</td>
 <td>-</td>
 <td>-</td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.tukaani:xz:jar:1.0</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/tukaani/xz/1.0/xz-1.0.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
 <td>-</td>
 <td>-</td>
 <td>-</td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.xerial.snappy:snappy-java:jar:1.0.5</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/xerial/snappy/snappy-java/1.0.5/snappy-java-1.0.5.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
 <td>-</td>
 <td>-</td>
 <td>-</td></tr>
-<tr class="a">
+<tr class="b">
 <th>Total</th>
 <th>central</th>
 <th>sonatype-nexus-snapshots</th>
 <th>innovationengineering</th>
 <th>apache.snapshots</th></tr>
-<tr class="b">
-<td>11 (compile: 9, test: 2)</td>
-<td>11</td>
+<tr class="a">
+<td>14 (compile: 12, test: 2)</td>
+<td>13</td>
 <td>0</td>
 <td>0</td>
 <td>0</td></tr></table></div>
