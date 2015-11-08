@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This class mantains the cache and the descrptors for property methods
+ * This class mantains the cache and the descriptors for property methods
  * 
  * @author mccalv
  *
