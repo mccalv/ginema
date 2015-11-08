@@ -30,11 +30,15 @@ import com.ginema.api.reflection.ReflectionUtils;
  * <ul>
  * <li>String
  * <li>Date
- * <li>Number
+ * <li>Boolean
+ * <li>Long
+ * <li>Double
+ * <li>Float
+ * <li>Integer
  * <li>bytes[].
  * </ul>
- * The holder contains the wrapped sensitive value and a {@link SensitiveDataID} which contains the
- * identifier
+ * The holder contains the wrapped sensitive value and the {@link SensitiveDataID} which contains the
+ * hash
  * 
  * @author mccalv
  *
@@ -49,7 +53,6 @@ public class SensitiveDataField<T> {
       add(String.class);
       add(Date.class);
       add(Boolean.class);
-      // Supported number
       add(Integer.class);
       add(Long.class);
       add(Double.class);
@@ -89,7 +92,8 @@ public class SensitiveDataField<T> {
 
 
   public SensitiveDataField(String identifier, T value) {
-    if (value!= null && !ReflectionUtils.isAssignableFrom(value.getClass(), SUPPORTED_FIELD_TYPES)) {
+    if (value != null
+        && !ReflectionUtils.isAssignableFrom(value.getClass(), SUPPORTED_FIELD_TYPES)) {
       throw new IllegalArgumentException("Type: " + value.getClass().getName()
           + " not supported. Sensitive data can be only of types:"
           + Arrays.toString(SUPPORTED_FIELD_TYPES.toArray()));
@@ -100,7 +104,8 @@ public class SensitiveDataField<T> {
     this.identifier = identifier == null ? new SensitiveDataID()
         : new SensitiveDataID(idGenerator.fromString(identifier));
 
-   if(value!=null) this.value = value;
+    if (value != null)
+      this.value = value;
   }
 
 

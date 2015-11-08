@@ -24,12 +24,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 
+
 /**
- * @author mccalv
- *
- */
-/**
- * Identifies the root object mantaining Sensitive data.
+ * Identifies the root object mantaning Sensitive data.
  * 
  * @author mccalv
  *

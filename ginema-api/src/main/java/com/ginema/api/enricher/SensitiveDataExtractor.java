@@ -16,9 +16,6 @@
  */
 package com.ginema.api.enricher;
 
-import java.beans.IntrospectionException;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
@@ -42,7 +39,9 @@ import com.ginema.api.storage.SensitiveDataID;
 import com.ginema.api.storage.SensitiveDataRoot;
 
 /**
- * Basic scope of this class is to enrich an
+ * Basic scope of this class is to provide utility to extract sensitive data from an object in order
+ * to be serialized or sent.
+ * 
  * 
  * @author mccalv
  * @param <T>
@@ -53,9 +52,15 @@ public class SensitiveDataExtractor {
 
 
   /**
-   * Given an object
+   * Given an domain object annotated with {@link SensitiveDataRoot}, checks all fields of type
+   * {@link SensitiveDataField} and populates a
+   * {@link com.ginema.api.storage.SensitiveDataHolder}, which is the Apache avro object designed to contain all
+   * sensitive data.
    * 
-   * @param d
+   * @throw {@link IllegalArgumentException} if the object is not annotated with
+   *        {@link SensitiveDataRoot} and does not contain a field of type {@link SensitiveDataID}
+   * 
+   * @param the object
    */
   public static SensitiveDataHolder extractSensitiveData(Object o) {
     SensitiveDataRoot sensitiveDataRoot = ReflectionUtils.getAnnotation(o, SensitiveDataRoot.class);
