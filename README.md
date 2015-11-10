@@ -28,7 +28,7 @@ The simplest enrichment supported is the one to extract from an object its sensi
 The opposite operation is to populate an object with sensitive data
 
 ```java
-  SensitiveDataEnricher.enricher(sensitiveDataHolder,object);
+  SensitiveDataEnricher.enrich(sensitiveDataHolder,object);
 ```
 
 The SensitiveDataHolder is an Apache Avro structure language agnostic which can be serialized in any possible enviroment
