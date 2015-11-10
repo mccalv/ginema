@@ -24,7 +24,7 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<groupId>com.ginema</groupId>
-	<artifactId>ginema-crypt</artifactId>
+	<artifactId>ginema-crypto</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>ginema-crypto</name>
 	<properties>

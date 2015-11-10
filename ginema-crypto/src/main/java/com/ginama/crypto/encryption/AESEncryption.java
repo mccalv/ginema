@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and limitations under the License.
  *******************************************************************************/
-package com.ginama.crypt.cypher;
+package com.ginama.crypto.encryption;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -27,7 +27,7 @@ import org.bouncycastle.crypto.engines.AESEngine;
 import org.bouncycastle.crypto.paddings.PaddedBufferedBlockCipher;
 import org.bouncycastle.crypto.params.KeyParameter;
 
-public class AES {
+public class AESEncryption {
 
 	PaddedBufferedBlockCipher encryptCipher;
 	PaddedBufferedBlockCipher decryptCipher;
@@ -40,7 +40,7 @@ public class AES {
 
 	
 
-	public AES(byte[] keyBytes) {
+	public AESEncryption(byte[] keyBytes) {
 		key = new byte[keyBytes.length];
 		System.arraycopy(keyBytes, 0, key, 0, keyBytes.length);
 		InitCiphers();
