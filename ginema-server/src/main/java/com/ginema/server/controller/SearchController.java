@@ -12,22 +12,30 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and limitations under the License.
  *******************************************************************************/
-/**
- * 
- */
-package com.ginama.crypto.encryption;
+package com.ginema.server.controller;
 
-import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
-/**
- * @author mccalv
- *
- */
-public interface EncryptionManager {
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class SearchController {
 
 
-  byte[] encryptWithKey(byte[] iS, InputStream iSkey, char[] password);
+  @RequestMapping("/map")
+  public Map<String, String> greeting() {
+    return new HashMap<String, String>() {
 
-  byte[] decryptWithKey(byte[] iS, InputStream key, char[] password);
+      private static final long serialVersionUID = 2339617500661436183L;
 
+      {
+        put("AFF", "AHT");
+        put("AFF2", "2AHT");
+      }
+    };
+
+  }
+ 
 }
