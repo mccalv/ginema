@@ -65,7 +65,7 @@ public class SensitiveDataExtractorTest {
      
       long time = System.currentTimeMillis();
       com.ginema.api.avro.SensitiveDataHolder enrich =
-          SensitiveDataExtractor.extractSensitiveData(s);
+         new  SensitiveDataExtractor().extractSensitiveData(s);
      // System.out.println("Enriching time:" + (System.currentTimeMillis() - time));
 
       assertNotNull(NAME1, enrich.getStrings().get(name.getIdentifier().getId()));

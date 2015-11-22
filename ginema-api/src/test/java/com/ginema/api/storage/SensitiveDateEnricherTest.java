@@ -63,6 +63,6 @@ public class SensitiveDateEnricherTest {
   @Test(expected = IllegalArgumentException.class)
   public void testEnrichment() {
 
-    SensitiveDataExtractor.extractSensitiveData(new DomainObject());
+    new SensitiveDataExtractor().extractSensitiveData(new DomainObject());
   }
 }

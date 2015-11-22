@@ -32,20 +32,16 @@ public class SensitiveDataEnricherTest {
   private static final String NAME = "name";
   public static final Date DATE = new Date();
   public static final Date DATE2 = new Date(DATE.getTime() - 100000L);
-
+private SensitiveDataEnricher enricher  =  new SensitiveDataEnricher();
 
   private final String ID1 = new UUIDGenerator().generate();
   private final String ID2 = new UUIDGenerator().generate();
 
   @Test
   public void testEnricher() {
-
-
     for (int i = 0; i < 100; i++) {
       checkEnrichment();
     }
-
-
 
   }
 
@@ -64,7 +60,7 @@ public class SensitiveDataEnricherTest {
     s.setDate(new SensitiveDataField<Date>(ID2, null));
 
     long time = System.nanoTime();
-    SensitiveDataEnricher.enrich(holder, s);
+    enricher.enrich(holder, s);
     time = System.nanoTime() - time;
     // System.out.println("NanoSeconds:" +time);
     assertEquals(s.getName().getValue(), NAME);

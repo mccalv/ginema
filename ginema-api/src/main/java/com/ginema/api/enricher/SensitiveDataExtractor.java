@@ -62,7 +62,7 @@ public class SensitiveDataExtractor {
    * 
    * @param the object
    */
-  public static SensitiveDataHolder extractSensitiveData(Object o) {
+  public  SensitiveDataHolder extractSensitiveData(Object o) {
     SensitiveDataRoot sensitiveDataRoot = ReflectionUtils.getAnnotation(o, SensitiveDataRoot.class);
     if (sensitiveDataRoot == null) {
       throwIllegalArgumentException();
@@ -82,7 +82,7 @@ public class SensitiveDataExtractor {
 
   }
 
-  private static void enrichWithId(Object o, SensitiveDataHolder holder) throws Exception {
+  private  void enrichWithId(Object o, SensitiveDataHolder holder) throws Exception {
     boolean asId = false;
     for (Field field : o.getClass().getDeclaredFields()) {
       if (!ReflectionUtils.isPrimitive(field)) {

@@ -90,6 +90,7 @@ public class PropertyDescriptorHolder {
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
+    @SuppressWarnings("rawtypes")
     public boolean equals(Object obj) {
       if (this == obj)
         return true;

@@ -48,7 +48,7 @@ public class SensitiveDataEnricher {
    * @param holder, the SensitiveDataHolder containing the populated values
    * @param object, the object containing just the sensitive data ids
    */
-  public static void enrich(SensitiveDataHolder holder, Object o) {
+  public void enrich(SensitiveDataHolder holder, Object o) {
     SensitiveDataRoot sensitiveDataRoot = ReflectionUtils.getAnnotation(o, SensitiveDataRoot.class);
     if (sensitiveDataRoot == null) {
       throwIllegalArgumentException();
@@ -67,7 +67,7 @@ public class SensitiveDataEnricher {
 
   }
 
-  private static void checkId(Object o, SensitiveDataHolder holder) throws Exception {
+  private void checkId(Object o, SensitiveDataHolder holder) throws Exception {
     boolean hasId = false;
     for (Field f : o.getClass().getDeclaredFields()) {
       if (!ReflectionUtils.isPrimitive(f)) {
@@ -96,7 +96,7 @@ public class SensitiveDataEnricher {
    * @throws IllegalAccessException
    */
   @SuppressWarnings("rawtypes")
-  private static void enrichObjectTree(Object o, SensitiveDataHolder holder) throws Exception {
+  private void enrichObjectTree(Object o, SensitiveDataHolder holder) throws Exception {
     for (Field f : o.getClass().getDeclaredFields()) {
       if (!ReflectionUtils.isPrimitive(f)) {
         Object value =
@@ -123,8 +123,7 @@ public class SensitiveDataEnricher {
    * @param value
    * @throws Exception
    */
-  private static void checkAndEnrichObject(SensitiveDataHolder holder, Object value)
-      throws Exception {
+  private void checkAndEnrichObject(SensitiveDataHolder holder, Object value) throws Exception {
     if (value != null && !ReflectionUtils.isJDKClass(value.getClass())
         && ReflectionUtils.isAssignableFrom(value.getClass(), Object.class)) {
       enrichObjectTree(value, holder);
@@ -134,8 +133,8 @@ public class SensitiveDataEnricher {
 
 
 
-  private static void populateHolderMapByType(Object obj, Field field, SensitiveDataField value,
-      SensitiveDataHolder holder) {
+  private void populateHolderMapByType(Object obj, Field field,
+      @SuppressWarnings("rawtypes") SensitiveDataField value, SensitiveDataHolder holder) {
     if (value == null || value.getIdentifier() == null)
       return;
     // Class clazz =value.getValue().getClass();
