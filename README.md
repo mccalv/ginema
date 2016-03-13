@@ -62,27 +62,27 @@ Big Data scenario (Apache Avro).
 
 An example of “SensitiveDataHolder” JSON:
 ```json
-{  \
-   **"id"**:"71d78c8d-c114-4782-973e-de50002044d6",\
-   **"domain"**:"domain",\
-   **"dates"**:{  \
-      **"411532c8-2225-4405-8318-13cfddc9015e"**:{  \
-         **"name"**:"411532c8-2225-4405-8318-13cfddc9015e",\
-         **"value"**:1455662605629\
-      }\
-   },\
-   **"strings"**:{  \
-      **"411532c8-2225-4405-8318-13cfddc9015e"**:{  \
-         **"name"**:"411532c8-2225-4405-8318-13cfddc9015e",\
-         **"value"**:"iban account"\
-      }\
-   },\
-   **"longs"**:null,\
-   **"integers"**:null,\
-   **"floats"**:null,\
-   **"doubles"**:null,\
-   **"bytes"**:null,\
-   **"booleans"**:null\
+{  
+   "id":"71d78c8d-c114-4782-973e-de50002044d6",
+   "domain":"domain",
+   "dates":{  
+      "411532c8-2225-4405-8318-13cfddc9015e":{  
+         "name":"411532c8-2225-4405-8318-13cfddc9015e",
+         "value":1455662605629
+      }
+   },
+   "strings":{  
+      "411532c8-2225-4405-8318-13cfddc9015e":{  
+         "name":"411532c8-2225-4405-8318-13cfddc9015e",
+         "value":"iban account"
+      }
+   },
+   "longs":null,
+   "integers":null,
+   "floats":null,
+   "doubles":null,
+   "bytes":null,
+	"booleans":null
 }
 ```
 While the backing JSON schema can be seen at the URL:
@@ -142,9 +142,6 @@ interface.
 **Technologies:**
 
 Java 1.8
-
 Maven 3.1.1
-
 Spring Boot
 
-https://github.com/mccalv/ginema
