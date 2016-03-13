@@ -1,5 +1,5 @@
 # Ginema  
-**(a framework for managing Sensitive Data)
+**(a framework for managing Sensitive Data)**
 <a href="https://travis-ci.org/mccalv/ginema">
 <img title="Build Status Images" src="https://travis-ci.org/mccalv/ginema.svg">
 </a>
@@ -115,19 +115,14 @@ One of the advantages of this approach is the following:
 
 Figure Sensitive Data Merging on the cloud
 
-**Current status of the Project**
+**Structure of the Project**
 
-![](img/media/image3.png)
+-   **Ginema api**: core API for enriching and storage
 
-The current maven project, totally hosted on GitHub is made up of 3 sub
-modules:
-
--   Ginema api: core API for enriching and storage
-
--   Ginema crypto: (Module to support encryption with normal RSA,
+-   **Ginema crypto**: (Module to support encryption with normal RSA,
     Elliptic curve, PGP)
 
--   Ginema Server: A rest server to support data sensitive data
+-   **Ginema Server**: A rest server to support data sensitive data
     distribution
 
 **Further development**
