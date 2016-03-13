@@ -33,6 +33,7 @@ import org.junit.Test;
 
 import com.ginema.api.avro.DateEntry;
 import com.ginema.api.avro.SensitiveDataHolder;
+import com.ginema.api.avro.StringEntry;
 import com.ginema.api.avro.util.SchemaHelper;
 
 /**
@@ -50,8 +51,8 @@ public class SerializationTest {
 
   @Test
   public void testSchemaBuilderAndJsonShouldBeEqual() throws Exception {
-      System.out.print("Check for Schema generation");
-      assertEquals(SchemaHelper.getGinemaSchemaFromClassPath(), SchemaHelper.getGinemaSchema());
+    System.out.print("Check for Schema generation");
+    assertEquals(SchemaHelper.getGinemaSchemaFromClassPath(), SchemaHelper.getGinemaSchema());
 
   }
 
@@ -63,7 +64,12 @@ public class SerializationTest {
     sensitiveDataHolder.setId(ID_HOLDER);
     sensitiveDataHolder.setDomain(DOMAIN);
     sensitiveDataHolder.setDates(new HashMap<String, DateEntry>());
+    sensitiveDataHolder.setStrings(new HashMap<String, StringEntry>());
+
     sensitiveDataHolder.getDates().put(ID_GENERATED, new DateEntry(ID_GENERATED, DATE.getTime()));
+    sensitiveDataHolder.getStrings().put(ID_GENERATED,
+        new StringEntry(ID_GENERATED, "iban account"));
+
     DatumWriter<SensitiveDataHolder> userDatumWriter =
         new SpecificDatumWriter<SensitiveDataHolder>(SensitiveDataHolder.class);
     DataFileWriter<SensitiveDataHolder> dataFileWriter =
@@ -86,10 +92,8 @@ public class SerializationTest {
       sensitideDataHolder = dataFileReader.next();
       assertEquals(ID_HOLDER, sensitideDataHolder.getId().toString());
       assertEquals(DOMAIN, sensitideDataHolder.getDomain().toString());
-
       assertEquals(DATE, new Date(sensitideDataHolder.getDates().get(ID_GENERATED).getValue()));
 
-      System.out.println(sensitideDataHolder);
     }
 
     AVRO_SERIALIZED_FILE.delete();

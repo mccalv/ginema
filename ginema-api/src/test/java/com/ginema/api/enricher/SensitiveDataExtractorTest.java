@@ -43,7 +43,7 @@ public class SensitiveDataExtractorTest {
 
   @Test
   public void testEnricherSimpleObject() {
-  
+
     SensitiveDataField<String> name = new SensitiveDataField<String>(NAME1);
     SensitiveDataField<String> surname = new SensitiveDataField<String>(SURNAME1);
 
@@ -56,18 +56,16 @@ public class SensitiveDataExtractorTest {
 
     SensitiveDataField<Date> date = new SensitiveDataField<Date>(DATE);
     SensitiveDataField<Date> date2 = new SensitiveDataField<Date>(DATE2);
-   
+
     // long time = System.currentTimeMillis();
 
     for (int i = 0; i < 100; i++) {
       SimpleDomainObject s =
           buildObject(name, surname, name2, surname2, name3, surname3, date, date2);
-     
-      long time = System.currentTimeMillis();
-      com.ginema.api.avro.SensitiveDataHolder enrich =
-         new  SensitiveDataExtractor().extractSensitiveData(s);
-     // System.out.println("Enriching time:" + (System.currentTimeMillis() - time));
 
+
+      com.ginema.api.avro.SensitiveDataHolder enrich =
+          new SensitiveDataExtractor().extractSensitiveData(s);
       assertNotNull(NAME1, enrich.getStrings().get(name.getIdentifier().getId()));
       assertNotNull(SURNAME1, enrich.getStrings().get(surname.getIdentifier().getId()));
       assertNotNull(NAME3, enrich.getStrings().get(name2.getIdentifier().getId()));
@@ -89,7 +87,7 @@ public class SensitiveDataExtractorTest {
       SensitiveDataField<Date> date2) {
     SimpleDomainObject s = new SimpleDomainObject();
     s.setId(new SensitiveDataID());
-  
+
     s.setDate(date);
 
     s.setName(name);
