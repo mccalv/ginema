@@ -1,5 +1,6 @@
 # Ginema  
 **(a framework for managing Sensitive Data)**
+<br />
 <a href="https://travis-ci.org/mccalv/ginema">
 <img title="Build Status Images" src="https://travis-ci.org/mccalv/ginema.svg">
 </a>
@@ -30,9 +31,9 @@ public class SimpleDomainObject {
 
 private SensitiveDataID id;
 
-private SensitiveDataField&lt;String&gt; name;
+private SensitiveDataFiel<String> name;
 
-private SensitiveDataField&lt;Date&gt; dateOfBirth;
+private SensitiveDataField<Date> dateOfBirth;
 
 private SimpleDomainObject child;
 ```
