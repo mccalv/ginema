@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright Mirko Calvaresi mccalv@gmail.com 2015 
+ * Copyright Mirko Calvaresi mccalv@gmail.com 2015, 2016 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and limitations under the License.
  *******************************************************************************/
-package com.ginema.crypt.encryption;
+package com.ginema.crypto.encryption;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -164,7 +164,7 @@ public class PGPEncryption {
    * @exception PGPException
    * @exception NoSuchProviderException
    */
-  private static byte[] encrypt(byte[] clearData, PGPPublicKey encKey, String fileName,
+  private static byte[] _doEncrypt(byte[] clearData, PGPPublicKey encKey, String fileName,
       boolean withIntegrityCheck, boolean armor)
           throws IOException, PGPException, NoSuchProviderException {
     if (fileName == null) {
@@ -218,7 +218,7 @@ public class PGPEncryption {
   }
 
   @SuppressWarnings("unchecked")
-  private static PGPPublicKey readPublicKey(InputStream in) throws IOException, PGPException {
+  public static PGPPublicKey readPublicKey(InputStream in) throws IOException, PGPException {
     in = PGPUtil.getDecoderStream(in);
 
     PGPPublicKeyRingCollection pgpPub = new PGPPublicKeyRingCollection(in);
@@ -253,7 +253,7 @@ public class PGPEncryption {
 
   public static byte[] encrypt(byte[] original, InputStream pubKey) throws Exception {
     Security.addProvider(new BouncyCastleProvider());
-    return encrypt(original, readPublicKey(pubKey), null, true, true);
+    return _doEncrypt(original, readPublicKey(pubKey), null, true, true);
 
 
   }

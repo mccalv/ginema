@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright Mirko Calvaresi mccalv@gmail.com 2015 
+ * Copyright Mirko Calvaresi mccalv@gmail.com 2015, 2016 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and limitations under the License.
  *******************************************************************************/
-package org.ginema.crypt.encryption;
+package org.ginema.crypto.encryption;
 
 import static org.junit.Assert.assertEquals;
 
@@ -20,7 +20,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
 import com.ginema.api.idgenerator.impl.RandomIDGenerator;
-import com.ginema.crypt.encryption.AESEncryption;
+import com.ginema.crypto.encryption.AESEncryption;
 
 public class AESEncryptionTest extends AbstractEncryptionTest {
 

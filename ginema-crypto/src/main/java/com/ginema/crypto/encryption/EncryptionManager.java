@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright Mirko Calvaresi mccalv@gmail.com 2015 
+ * Copyright Mirko Calvaresi mccalv@gmail.com 2015, 2016 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 /**
  * 
  */
-package com.ginema.crypt.encryption;
+package com.ginema.crypto.encryption;
 
 import java.io.InputStream;
 
@@ -25,7 +25,13 @@ import java.io.InputStream;
  */
 public interface EncryptionManager {
 
-
+  /**
+   * 
+   * @param iS
+   * @param iSkey
+   * @param password
+   * @return
+   */
   byte[] encryptWithKey(byte[] iS, InputStream iSkey, char[] password);
 
   byte[] decryptWithKey(byte[] iS, InputStream key, char[] password);

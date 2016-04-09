@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright Mirko Calvaresi mccalv@gmail.com 2015
+ * Copyright Mirko Calvaresi mccalv@gmail.com 2015, 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -11,13 +11,13 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  *******************************************************************************/
-package org.ginema.crypt.encryption;
+package org.ginema.crypto.encryption;
 
 import static org.junit.Assert.assertEquals;
 
 import java.io.InputStream;
 
-import com.ginema.crypt.encryption.PGPEncryption;
+import com.ginema.crypto.encryption.PGPEncryption;
 
 public class PGPTestEncryptionTest extends AbstractEncryptionTest {
 

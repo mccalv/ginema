@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright Mirko Calvaresi mccalv@gmail.com 2015 
+ * Copyright Mirko Calvaresi mccalv@gmail.com 2015, 2016 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and limitations under the License.
  *******************************************************************************/
-package com.ginema.crypt.encryption;
+package com.ginema.crypto.encryption;
 
 import java.io.InputStream;
 import java.io.OutputStream;
