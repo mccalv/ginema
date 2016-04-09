@@ -19,8 +19,8 @@ import static org.junit.Assert.assertEquals;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
-import com.ginama.crypto.encryption.AESEncryption;
 import com.ginema.api.idgenerator.impl.RandomIDGenerator;
+import com.ginema.crypt.encryption.AESEncryption;
 
 public class AESEncryptionTest extends AbstractEncryptionTest {
 

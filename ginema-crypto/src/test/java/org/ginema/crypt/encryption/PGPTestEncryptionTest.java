@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.InputStream;
 
-import com.ginama.crypto.encryption.PGPEncryption;
+import com.ginema.crypt.encryption.PGPEncryption;
 
 public class PGPTestEncryptionTest extends AbstractEncryptionTest {
 

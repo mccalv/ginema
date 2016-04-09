@@ -15,7 +15,7 @@
 /**
  * 
  */
-package com.ginama.crypto.encryption;
+package com.ginema.crypt.encryption;
 
 import java.io.InputStream;
 
