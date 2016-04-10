@@ -13,21 +13,35 @@
  *******************************************************************************/
 package org.ginema.crypto.encryption;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.InputStream;
 
+import com.ginema.crypto.encryption.EncryptionManager;
 import com.ginema.crypto.encryption.PGPEncryption;
+import com.ginema.crypto.encryption.impl.PGPEncryptionManager;
 
 public class PGPTestEncryptionTest extends AbstractEncryptionTest {
-
-  protected void verifyAndDecrypt(String text) throws Exception {
-
-    InputStream privateKey = PGPEncryption.class.getResourceAsStream("/keys/pgp/secret.asc");
-    InputStream pubKey = PGPEncryption.class.getResourceAsStream("/keys/pgp/pub.asc");
-    byte enc[] = PGPEncryption.encrypt(text.getBytes(), pubKey);
-    byte dec[] = PGPEncryption.decrypt(enc, privateKey, "password".toCharArray());
-    System.out.println(text);
-    assertEquals(text, new String(dec));
+  @Override
+  protected EncryptionManager getEncryptionManager() {
+    return new PGPEncryptionManager();
   }
+
+  @Override
+  protected InputStream getPrivateKey() {
+    return PGPEncryption.class.getResourceAsStream("/keys/pgp/secret.asc");
+
+  }
+
+  @Override
+  protected InputStream getPublicKey() {
+    return PGPEncryption.class.getResourceAsStream("/keys/pgp/pub.asc");
+
+  }
+
+  @Override
+  protected char[] getPassword() {
+    return "password".toCharArray();
+  }
+
+
+
 }

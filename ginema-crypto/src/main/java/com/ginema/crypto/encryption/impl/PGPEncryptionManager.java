@@ -40,6 +40,7 @@ public class PGPEncryptionManager implements EncryptionManager {
     try {
       return PGPEncryption.encrypt(iS, iSkey);
     } catch (Exception e) {
+      e.printStackTrace();
       throw new GinemaCryptoException(e, Type.ENCRYPTION_ERROR);
     }
   }
@@ -55,6 +56,7 @@ public class PGPEncryptionManager implements EncryptionManager {
     try {
       return PGPEncryption.decrypt(iS, key, password);
     } catch (Exception e) {
+      e.printStackTrace();
       throw new GinemaCryptoException(e, Type.DECRYPTION_ERROR);
     }
   }

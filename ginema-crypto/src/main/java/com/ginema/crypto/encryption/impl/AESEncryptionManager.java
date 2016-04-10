@@ -31,6 +31,7 @@ public class AESEncryptionManager implements EncryptionManager {
       new AESEncryption(new String(password).getBytes()).encrypt(new ByteArrayInputStream(iS), oS);
       return oS.toByteArray();
     } catch (Exception e) {
+      e.printStackTrace();
       throw new GinemaCryptoException(e, Type.ENCRYPTION_ERROR);
     }
   }
