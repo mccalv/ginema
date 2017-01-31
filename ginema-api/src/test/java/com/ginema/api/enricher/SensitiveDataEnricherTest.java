@@ -32,7 +32,7 @@ public class SensitiveDataEnricherTest {
   private static final String NAME = "name";
   public static final Date DATE = new Date();
   public static final Date DATE2 = new Date(DATE.getTime() - 100000L);
-private SensitiveDataEnricher enricher  =  new SensitiveDataEnricher();
+  private SensitiveDataEnricher enricher = new SensitiveDataEnricher();
 
   private final String ID1 = new UUIDGenerator().generate();
   private final String ID2 = new UUIDGenerator().generate();

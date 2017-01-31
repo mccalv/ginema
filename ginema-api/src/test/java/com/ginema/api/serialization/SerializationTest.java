@@ -29,6 +29,7 @@ import org.apache.avro.io.DatumReader;
 import org.apache.avro.io.DatumWriter;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificDatumWriter;
+import org.apache.commons.compress.compressors.FileNameUtil;
 import org.junit.Test;
 
 import com.ginema.api.avro.DateEntry;
@@ -95,7 +96,7 @@ public class SerializationTest {
       assertEquals(DATE, new Date(sensitideDataHolder.getDates().get(ID_GENERATED).getValue()));
 
     }
-
+    System.out.println(new String(java.nio.file.Files.readAllBytes(AVRO_SERIALIZED_FILE.toPath())));
     AVRO_SERIALIZED_FILE.delete();
     dataFileReader.close();
 

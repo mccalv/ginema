@@ -30,16 +30,16 @@ public class SensitiveDataExtractorTest {
 
   public static final Date DATE = new Date();
   public static final Date DATE2 = new Date(DATE.getTime() - 100000L);
-  public static final String NAME1 = "name";
+  public static final String NAME1 = "John";
 
-  public static final String SURNAME1 = "surname";
+  public static final String SURNAME1 = "Kennedy";
 
 
-  public static final String NAME2 = "name2";
-  public static final String SURNAME2 = "surname2";
+  public static final String NAME2 = "Mike";
+  public static final String SURNAME2 = "Tison";
 
-  public static final String NAME3 = "name3";
-  public static final String SURNAME3 = "surname3";
+  public static final String NAME3 = "Barak";
+  public static final String SURNAME3 = "Obama";
 
   @Test
   public void testEnricherSimpleObject() {
@@ -66,6 +66,7 @@ public class SensitiveDataExtractorTest {
 
       com.ginema.api.avro.SensitiveDataHolder enrich =
           new SensitiveDataExtractor().extractSensitiveData(s);
+      System.out.println(enrich);
       assertNotNull(NAME1, enrich.getStrings().get(name.getIdentifier().getId()));
       assertNotNull(SURNAME1, enrich.getStrings().get(surname.getIdentifier().getId()));
       assertNotNull(NAME3, enrich.getStrings().get(name2.getIdentifier().getId()));

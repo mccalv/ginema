@@ -31,7 +31,7 @@ public class SimpleDomainObject {
 
 private SensitiveDataID id;
 
-private SensitiveDataFiel<String> name;
+private SensitiveDataField<String> name;
 
 private SensitiveDataField<Date> dateOfBirth;
 
